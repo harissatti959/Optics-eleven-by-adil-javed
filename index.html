@@ -101,7 +101,7 @@
         </div>
       </a>
 
-      <!-- Desktop Links (Optical Products First) -->
+      <!-- Desktop Links -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
         <a href="#collections" class="text-[#D4AF37] hover:text-white transition-colors font-semibold">Optical Products</a>
         <a href="#home" class="hover:text-white transition-colors">Clinic & Doctor</a>
@@ -152,7 +152,7 @@
     </div>
   </header>
 
-  <!-- 1. EYEWEAR GALLERY (OPTICAL PRODUCTS ON TOP) -->
+  <!-- EYEWEAR GALLERY (OPTICAL PRODUCTS ON TOP) -->
   <section id="collections" class="pt-10 sm:pt-14 pb-20 lg:pb-24 border-b border-white/5 bg-[#0A0F1D]/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto space-y-3 mb-12">
@@ -167,9 +167,8 @@
         </p>
       </div>
 
-      <!-- 2-Column Responsive Product Grid (Strictly 2 per row on Mobile & Desktop) -->
+      <!-- Frames Grid (2 per row on Mobile and Desktop) -->
       <div class="grid grid-cols-2 gap-3.5 sm:gap-6 lg:gap-8">
-        
         <!-- Product 1 -->
         <div class="p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#D4AF37]/50 hover:bg-white/[0.04] transition-all flex flex-col justify-between shadow-xl">
           <div>
@@ -285,7 +284,6 @@
             </button>
           </div>
         </div>
-
       </div>
 
       <div class="text-center mt-10">
@@ -297,7 +295,7 @@
     </div>
   </section>
 
-  <!-- 2. HERO SECTION -->
+  <!-- HERO SECTION -->
   <section id="home" class="py-20 lg:py-28 relative overflow-hidden border-b border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -319,14 +317,18 @@
               <i data-lucide="calendar" class="w-4 h-4"></i>
               <span>Book Eye Exam</span>
             </a>
-            <a href="#collections" class="px-8 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 transition-colors flex items-center gap-2">
-              <i data-lucide="glasses" class="w-4 h-4 text-[#D4AF37]"></i>
-              <span>View Eyewear Gallery</span>
-            </a>
+            <button onclick="openTryOnModal()" class="px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 transition-colors flex items-center gap-2">
+              <i data-lucide="camera" class="w-4 h-4 text-[#D4AF37]"></i>
+              <span>3D Virtual Try-On</span>
+            </button>
+            <button onclick="openScreenerModal()" class="px-6 py-3.5 rounded-full bg-white/[0.02] hover:bg-white/5 text-slate-300 font-medium text-sm border border-white/5 transition-colors flex items-center gap-2">
+              <i data-lucide="eye" class="w-4 h-4 text-[#D4AF37]"></i>
+              <span>Vision Screener</span>
+            </button>
           </div>
 
           <!-- Trust Badges -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-white/10 text-left">
+          <div class="pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center lg:text-left">
             <div>
               <div class="text-2xl font-light text-white font-serif">18,000+</div>
               <div class="text-[11px] text-slate-400 font-light">Eyes Tested</div>
@@ -368,7 +370,7 @@
     </div>
   </section>
 
-  <!-- 3. SPECIALIST DOCTOR PROFILE -->
+  <!-- SPECIALIST DOCTOR PROFILE -->
   <section id="doctor" class="py-20 lg:py-24 border-b border-white/5 bg-[#0A0F1D]/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -399,26 +401,29 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10">
               <div class="text-sm font-semibold text-white">B.Sc. Optometry & Vision Sciences</div>
-              <div class="text-xs text-slate-400 font-light mt-1">King Edward Medical University / Allied Sciences</div>
+              <div class="text-xs text-slate-400 font-light mt-1">Specialized clinical fellowship in anterior segment evaluation and corneal curvature analysis.</div>
             </div>
             <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10">
-              <div class="text-sm font-semibold text-white">Certified Digital Refractionist</div>
-              <div class="text-xs text-slate-400 font-light mt-1">Zeiss Academy International Certified Practitioner</div>
+              <div class="text-sm font-semibold text-white">Keratoconus & Custom Lenses</div>
+              <div class="text-xs text-slate-400 font-light mt-1">Certified fitting specialist for rigid gas-permeable (RGP), toric, and customized ortho-k lenses.</div>
             </div>
             <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10">
-              <div class="text-sm font-semibold text-white">Pediatric Vision Specialist</div>
-              <div class="text-xs text-slate-400 font-light mt-1">Focus on lazy eye (amblyopia) & computer vision strain</div>
+              <div class="text-sm font-semibold text-white">Digital Strain & Blue-Light Ergonomics</div>
+              <div class="text-xs text-slate-400 font-light mt-1">Prescription customization for software engineers, finance analysts, and corporate leaders.</div>
             </div>
             <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10">
-              <div class="text-sm font-semibold text-white">Keratoconus & Custom Optics</div>
-              <div class="text-xs text-slate-400 font-light mt-1">Specialty gas-permeable & scleral contact lens designs</div>
+              <div class="text-sm font-semibold text-white">Zero Distortion Progressive Optics</div>
+              <div class="text-xs text-slate-400 font-light mt-1">Freeform digital progressive lens adaptation rate exceeding 99.4%.</div>
             </div>
           </div>
 
-          <div class="pt-2">
-            <a href="#booking" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs uppercase tracking-wider transition-colors">
-              <i data-lucide="calendar" class="w-4 h-4"></i>
-              <span>Book Appointment with Dr. Adil</span>
+          <div class="pt-4 flex items-center gap-4">
+            <a href="#booking" class="px-6 py-3 rounded-full bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-md transition-all">
+              Schedule Consultation with Dr. Adil
+            </a>
+            <a href="https://wa.me/923111611100" target="_blank" class="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 text-white font-medium text-xs border border-white/10 transition-colors flex items-center gap-1.5">
+              <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+              <span>WhatsApp Inquiries</span>
             </a>
           </div>
         </div>
@@ -426,23 +431,22 @@
     </div>
   </section>
 
-  <!-- 4. CLINICAL SERVICES -->
+  <!-- DIAGNOSTIC CLINICAL SERVICES -->
   <section id="services" class="py-20 lg:py-28 border-b border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
         <div class="inline-block px-3 py-1 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[#D4AF37] text-[10px] uppercase tracking-widest font-semibold">
-          Diagnostic Excellence
+          Advanced Diagnostics
         </div>
         <h2 class="text-3xl sm:text-4xl font-light text-white tracking-tight">
           Comprehensive Clinical <span class="text-[#D4AF37] font-serif italic">Optometry</span>
         </h2>
         <p class="text-slate-400 text-sm leading-relaxed font-light">
-          State-of-the-art ophthalmic equipment ensuring clinical precision beyond basic autorefraction.
+          We combine German corneal topography, digital autorefractors, and gentle non-contact tonometers to provide meticulous ocular care.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Service 1 -->
         <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#D4AF37]/40 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-4">
             <i data-lucide="activity" class="w-5 h-5"></i>
@@ -451,7 +455,6 @@
           <p class="text-xs text-slate-400 leading-relaxed font-light">Thorough evaluation of visual acuity, binocular coordination, refractive status, and ocular health screening.</p>
         </div>
 
-        <!-- Service 2 -->
         <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#D4AF37]/40 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-4">
             <i data-lucide="scan" class="w-5 h-5"></i>
@@ -460,7 +463,6 @@
           <p class="text-xs text-slate-400 leading-relaxed font-light">Sub-millimeter mapping of corneal aberrations to eliminate glare, night-driving halos, and astigmatism blur.</p>
         </div>
 
-        <!-- Service 3 -->
         <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#D4AF37]/40 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-4">
             <i data-lucide="shield-check" class="w-5 h-5"></i>
@@ -469,7 +471,6 @@
           <p class="text-xs text-slate-400 leading-relaxed font-light">Gentle intraocular fluid pressure screening for early detection and prevention of glaucoma risk factors.</p>
         </div>
 
-        <!-- Service 4 -->
         <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#D4AF37]/40 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-4">
             <i data-lucide="disc" class="w-5 h-5"></i>
@@ -478,7 +479,6 @@
           <p class="text-xs text-slate-400 leading-relaxed font-light">Specialized fittings for keratoconus, high astigmatism, bifocal contacts, and silicone hydrogel comfort lenses.</p>
         </div>
 
-        <!-- Service 5 -->
         <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#D4AF37]/40 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-4">
             <i data-lucide="layers" class="w-5 h-5"></i>
@@ -487,7 +487,6 @@
           <p class="text-xs text-slate-400 leading-relaxed font-light">Targeted anti-fatigue prescription filtering high-frequency blue rays for extended workstation usage.</p>
         </div>
 
-        <!-- Service 6 -->
         <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#D4AF37]/40 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-4">
             <i data-lucide="smile" class="w-5 h-5"></i>
@@ -499,7 +498,7 @@
     </div>
   </section>
 
-  <!-- 5. APPOINTMENT BOOKING SECTION -->
+  <!-- APPOINTMENT BOOKING SECTION -->
   <section id="booking" class="py-20 lg:py-28 border-b border-white/5">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center space-y-3 mb-12">
@@ -515,91 +514,84 @@
       </div>
 
       <!-- Booking Card -->
-      <div class="p-6 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/10 shadow-2xl relative">
+      <div class="rounded-3xl bg-white/[0.02] border border-white/10 p-6 sm:p-10 shadow-2xl">
         <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Full Name *</label>
-              <input type="text" id="b-name" required placeholder="e.g. Tariq Khan" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-sm">
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-widest mb-1.5">Full Name *</label>
+              <input type="text" id="b-name" required placeholder="e.g. Daniyal Khan" class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]">
             </div>
-
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">WhatsApp / Mobile Number *</label>
-              <input type="tel" id="b-phone" required placeholder="0300 1234567" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-sm">
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-widest mb-1.5">Phone / WhatsApp *</label>
+              <input type="tel" id="b-phone" required placeholder="e.g. 0311 1611100" class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]">
             </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Desired Service *</label>
-              <select id="b-service" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-[#D4AF37] text-sm">
-                <option value="Comprehensive 9-Point Eye Exam">Comprehensive 9-Point Eye Exam (PKR 2,500)</option>
-                <option value="Wavefront Digital Refraction">Wavefront Digital Refraction & Prescription (PKR 3,000)</option>
-                <option value="Contact Lens Fitting & Trial">Contact Lens Fitting & Trial (PKR 2,000)</option>
-                <option value="Luxury Eyewear Consultation">Designer Eyewear Styling & Dispensing (Complimentary)</option>
-                <option value="Pediatric Vision Assessment">Pediatric Vision Assessment (PKR 2,500)</option>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-widest mb-1.5">Consultation Service</label>
+              <select id="b-service" class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-[#D4AF37]">
+                <option>9-Point Comprehensive Eye Examination</option>
+                <option>Laser Computerized Wavefront Refraction</option>
+                <option>Luxury Eyewear Fitting & Facial Styling</option>
+                <option>Glaucoma & Intraocular Pressure (IOP) Check</option>
+                <option>Keratoconus & Custom Contact Lens Fitting</option>
+                <option>Digital Eyestrain & Blue-Light Consultation</option>
               </select>
             </div>
-
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Consultant *</label>
-              <select id="b-doctor" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-[#D4AF37] text-sm">
-                <option value="Dr. Adil Javed">Dr. Adil Javed (Chief Optometrist)</option>
-                <option value="Senior Clinical Associate">Senior Clinical Associate</option>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-widest mb-1.5">Specialist Doctor</label>
+              <select id="b-doctor" class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-[#D4AF37]">
+                <option>Dr. Adil Javed (Chief Consultant)</option>
+                <option>Senior Pediatric Optometrist</option>
+                <option>Contact Lens & Prosthetics Specialist</option>
               </select>
             </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Preferred Date *</label>
-              <input type="date" id="b-date" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-[#D4AF37] text-sm">
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-widest mb-1.5">Preferred Date *</label>
+              <input type="date" id="b-date" required class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-[#D4AF37] [color-scheme:dark]">
             </div>
-
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Preferred Time Slot *</label>
-              <select id="b-time" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-[#D4AF37] text-sm">
-                <option value="12:00 PM - 01:00 PM">12:00 PM – 01:00 PM</option>
-                <option value="02:00 PM - 03:00 PM">02:00 PM – 03:00 PM</option>
-                <option value="04:00 PM - 05:00 PM">04:00 PM – 05:00 PM</option>
-                <option value="06:00 PM - 07:00 PM">06:00 PM – 07:00 PM</option>
-                <option value="07:30 PM - 08:30 PM">07:30 PM – 08:30 PM (Evening)</option>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-widest mb-1.5">Preferred Time Slot</label>
+              <select id="b-time" class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-[#D4AF37]">
+                <option>11:30 AM – 12:30 PM (Morning)</option>
+                <option>02:00 PM – 03:00 PM (Afternoon)</option>
+                <option>04:30 PM – 05:30 PM (Evening)</option>
+                <option>07:00 PM – 08:30 PM (Prime Evening)</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Current Symptoms or Frame Inquiries (Optional)</label>
-            <textarea id="b-notes" rows="3" placeholder="e.g. Blur when reading, interested in titanium frames, or previous prescription notes..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-sm"></textarea>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-widest mb-1.5">Notes or Symptoms (Optional)</label>
+            <input type="text" id="b-notes" placeholder="e.g. Experiencing digital headaches, interested in progressive lenses..." class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]">
           </div>
 
-          <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
-            <div class="text-xs text-slate-400 flex items-center gap-2">
-              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
-              <span>Instant WhatsApp Reservation confirmation</span>
-            </div>
-
-            <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-sm shadow-lg shadow-[#D4AF37]/20 transition-all">
-              Confirm & Book Appointment
+          <div class="flex items-center justify-between pt-2">
+            <span class="text-xs text-slate-400 font-light">Direct confirmation sent to your WhatsApp</span>
+            <button type="submit" class="px-8 py-3.5 rounded-full bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-sm shadow-lg shadow-[#D4AF37]/20 transition-all flex items-center gap-2">
+              <i data-lucide="calendar" class="w-4 h-4"></i>
+              <span>Confirm Appointment Reservation</span>
             </button>
           </div>
         </form>
 
-        <!-- Booking Confirmation Box (Hidden initially) -->
-        <div id="booking-confirmation" class="hidden text-center py-10 space-y-4">
-          <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
-            <i data-lucide="check" class="w-8 h-8"></i>
+        <!-- Confirmation Pass (Hidden Initially) -->
+        <div id="booking-confirmation" class="hidden space-y-6 pt-4 text-center">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
+            <i data-lucide="check-circle-2" class="w-8 h-8"></i>
           </div>
-          <h3 class="text-2xl font-light text-white font-serif">Appointment Reserved!</h3>
-          <p id="conf-msg" class="text-slate-300 text-sm max-w-md mx-auto"></p>
-          <div id="conf-ref" class="text-xs font-mono text-[#D4AF37] bg-white/5 py-1 px-3 rounded-full inline-block"></div>
-          <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a id="conf-wa-btn" href="#" target="_blank" class="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-              <i data-lucide="message-circle" class="w-4 h-4"></i>
-              <span>Confirm on WhatsApp</span>
+          <div class="inline-block px-3 py-1 rounded-full bg-white/5 text-xs font-bold text-[#D4AF37] border border-white/10 tracking-widest uppercase" id="conf-ref">
+            Booking Reference: OE-7821
+          </div>
+          <h3 class="text-2xl font-light text-white font-serif">Appointment Provisionally Reserved!</h3>
+          <p class="text-sm text-slate-400 max-w-lg mx-auto font-light" id="conf-msg">
+            Thank you. Your consultation has been scheduled with Dr. Adil Javed in Blue Area, Islamabad.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <a id="conf-wa-btn" href="#" target="_blank" class="px-6 py-3 rounded-full bg-[#D4AF37] text-[#0F172A] font-bold text-xs flex items-center gap-2">
+              <i data-lucide="share-2" class="w-4 h-4"></i>
+              <span>Confirm via WhatsApp Desk</span>
             </a>
-            <button onclick="resetBookingForm()" class="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold">
-              Book Another Session
+            <button onclick="resetBookingForm()" class="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold border border-white/10">
+              Book Another Consultation
             </button>
           </div>
         </div>
@@ -607,225 +599,139 @@
     </div>
   </section>
 
-  <!-- 6. PATIENT REVIEWS -->
-  <section id="reviews" class="py-20 lg:py-24 border-b border-white/5 bg-[#0A0F1D]/40">
+  <!-- REVIEWS STRIP -->
+  <section id="reviews" class="py-20 lg:py-24 border-b border-white/5 bg-[#0A0F1D]/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+      <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
         <div class="inline-block px-3 py-1 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[#D4AF37] text-[10px] uppercase tracking-widest font-semibold">
-          Islamabad Community Trust
+          Patient Satisfaction & Trust
         </div>
         <h2 class="text-3xl sm:text-4xl font-light text-white tracking-tight">
-          Verified <span class="text-[#D4AF37] font-serif italic">Patient Stories</span>
+          Trusted Across <span class="text-[#D4AF37] font-serif italic">Islamabad</span>
         </h2>
-        <div class="flex items-center justify-center gap-2 pt-1">
-          <div class="flex text-amber-400">
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-          </div>
-          <span class="text-xs text-slate-300 font-medium">4.9 / 5.0 (340+ Google & Direct Reviews)</span>
-        </div>
+        <p class="text-slate-400 text-sm leading-relaxed font-light">
+          Read firsthand experiences from executives, surgeons, legal practitioners, and families treated by Dr. Adil Javed.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Review 1 -->
-        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex text-amber-400">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed font-light italic">
-              "Dr. Adil Javed diagnosed my persistent night driving headache that three other doctors couldn't solve. He tailored custom digital anti-reflective Zeiss progressive lenses. Exceptional professionalism in Blue Area."
-            </p>
-          </div>
-          <div class="pt-4 border-t border-white/10 mt-4 flex items-center justify-between">
-            <div class="text-xs font-semibold text-white">Barrister Salman M.</div>
-            <span class="text-[10px] text-slate-500">Islamabad • Verified</span>
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+          <div class="flex text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs sm:text-sm text-slate-300 italic font-light leading-relaxed">
+            "Dr. Adil Javed solved my prolonged digital eyestrain and headaches. His 9-point exam is remarkably thorough. My progressive lenses from Optics Eleven are crystal clear."
+          </p>
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+            <span class="font-semibold text-white">Hamza Tariq</span>
+            <span class="text-slate-500 font-light">F-7, Islamabad</span>
           </div>
         </div>
 
-        <!-- Review 2 -->
-        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex text-amber-400">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed font-light italic">
-              "The eyewear collection is 100% authentic. Got Lindberg titanium rimless frames. Weighs nothing on my face! The 3D try-on gave me an exact idea before visiting."
-            </p>
-          </div>
-          <div class="pt-4 border-t border-white/10 mt-4 flex items-center justify-between">
-            <div class="text-xs font-semibold text-white">Dr. Ayesha Siddiqui</div>
-            <span class="text-[10px] text-slate-500">F-7, Islamabad</span>
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+          <div class="flex text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs sm:text-sm text-slate-300 italic font-light leading-relaxed">
+            "Authentic Lindberg frames with certified Danish serial numbers. By far the most refined optical boutique in Islamabad. The staff and Dr. Adil are true professionals."
+          </p>
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+            <span class="font-semibold text-white">Zara S. Malik</span>
+            <span class="text-slate-500 font-light">E-7, Islamabad</span>
           </div>
         </div>
 
-        <!-- Review 3 -->
-        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex text-amber-400">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed font-light italic">
-              "Brought my 8-year-old son for vision screening. Dr. Adil was extremely gentle and patient. Optics Eleven is the best clinic in Islamabad for pediatric eye care."
-            </p>
-          </div>
-          <div class="pt-4 border-t border-white/10 mt-4 flex items-center justify-between">
-            <div class="text-xs font-semibold text-white">Hamza Abbasi</div>
-            <span class="text-[10px] text-slate-500">Rawalpindi / Islamabad</span>
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+          <div class="flex text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs sm:text-sm text-slate-300 italic font-light leading-relaxed">
+            "The non-contact tonometry and keratoconus fitting were completely painless. Highly recommend Dr. Adil Javed for any complex refractive issue."
+          </p>
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+            <span class="font-semibold text-white">Barrister Asad Qureshi</span>
+            <span class="text-slate-500 font-light">Blue Area, Islamabad</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 7. CLINICAL FAQS -->
-  <section class="py-20 border-b border-white/5">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center space-y-3 mb-12">
-        <div class="inline-block px-3 py-1 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[#D4AF37] text-[10px] uppercase tracking-widest font-semibold">
-          Patient Queries
-        </div>
-        <h2 class="text-3xl font-light text-white tracking-tight">
-          Frequently Asked <span class="text-[#D4AF37] font-serif italic">Questions</span>
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        <details class="group p-5 rounded-2xl bg-white/[0.02] border border-white/10 cursor-pointer">
-          <summary class="text-sm font-semibold text-white flex items-center justify-between list-none">
-            <span>How often should I undergo a comprehensive eye exam?</span>
-            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
-          </summary>
-          <p class="text-xs text-slate-400 mt-3 leading-relaxed font-light">
-            We recommend an annual comprehensive eye exam for adults and school-age children. Screen intensive workers and contact lens wearers should visit every 6 to 12 months.
-          </p>
-        </details>
-
-        <details class="group p-5 rounded-2xl bg-white/[0.02] border border-white/10 cursor-pointer">
-          <summary class="text-sm font-semibold text-white flex items-center justify-between list-none">
-            <span>Are the designer frames at Optics Eleven guaranteed authentic?</span>
-            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
-          </summary>
-          <p class="text-xs text-slate-400 mt-3 leading-relaxed font-light">
-            Yes, 100%. All frames come with genuine manufacturer warranty, certificate of authenticity, serial number verification, and brand cases directly from official international distributors (Tom Ford, Lindberg, Gucci, Oliver Peoples, Ray-Ban).
-          </p>
-        </details>
-
-        <details class="group p-5 rounded-2xl bg-white/[0.02] border border-white/10 cursor-pointer">
-          <summary class="text-sm font-semibold text-white flex items-center justify-between list-none">
-            <span>Do I need an appointment or can I walk in?</span>
-            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
-          </summary>
-          <p class="text-xs text-slate-400 mt-3 leading-relaxed font-light">
-            Walk-ins are welcome for frame browsing, adjustments, and boutique inquiries. However, for specialized clinical consultations and refraction with Dr. Adil Javed, prior appointment booking is strongly advised to prevent waiting.
-          </p>
-        </details>
-
-        <details class="group p-5 rounded-2xl bg-white/[0.02] border border-white/10 cursor-pointer">
-          <summary class="text-sm font-semibold text-white flex items-center justify-between list-none">
-            <span>Can you customize lenses for high prescriptions or astigmatism?</span>
-            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
-          </summary>
-          <p class="text-xs text-slate-400 mt-3 leading-relaxed font-light">
-            Yes. We specialize in ultra-high index 1.74 lenses, customized free-form digital progressives, blue-light defense, and chromatic aberration reduction tailored to sub-millimeter pupillary distance.
-          </p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. LOCATION & CONTACT -->
-  <section id="contact" class="py-20 border-b border-white/5 bg-[#0A0F1D]/60">
+  <!-- CLINIC LOCATION & CONTACT -->
+  <section id="contact" class="py-20 lg:py-28 border-b border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-6 space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Contact Info -->
+        <div class="lg:col-span-5 space-y-6">
           <div class="inline-block px-3 py-1 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[#D4AF37] text-[10px] uppercase tracking-widest font-semibold">
-            Visit Optics Eleven
+            Visit Our Flagship Clinic
           </div>
           <h2 class="text-3xl sm:text-4xl font-light text-white tracking-tight">
-            Flagship Optical <span class="text-[#D4AF37] font-serif italic">Center</span>
+            Blue Area, <span class="text-[#D4AF37] font-serif italic">Islamabad</span>
           </h2>
-          <p class="text-slate-300 text-sm leading-relaxed font-light">
-            Conveniently situated in the commercial heart of Islamabad on Fazal-ul-Haq Road, Blue Area, with dedicated customer parking and immediate metro connectivity.
+          <p class="text-slate-300 text-sm font-light leading-relaxed">
+            Centrally positioned in the commercial heart of the capital on Fazal-ul-Haq Road. Dedicated patient valet parking and direct walk-in accessibility.
           </p>
 
           <div class="space-y-4 pt-2">
-            <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
               <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] shrink-0">
                 <i data-lucide="map-pin" class="w-5 h-5"></i>
               </div>
               <div>
-                <div class="text-xs font-bold text-[#D4AF37] uppercase tracking-wider">Physical Address</div>
-                <div class="text-sm font-semibold text-white mt-0.5">Optics Eleven with Dr. Adil Javed</div>
-                <div class="text-xs text-slate-400 font-light mt-0.5">Fazal-ul-Haq Road, Opposite Beverly Centre, Blue Area, Islamabad, 44000</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Address</div>
+                <div class="text-sm text-white font-medium mt-0.5">Optics Eleven with Dr. Adil Javed</div>
+                <div class="text-xs text-slate-300 font-light">Fazal-ul-Haq Road, Blue Area (Opposite Beverly Centre), Islamabad</div>
               </div>
             </div>
 
-            <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] shrink-0">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Direct Call & WhatsApp</div>
+                <a href="tel:+923111611100" class="text-sm text-white font-medium hover:text-[#D4AF37] block mt-0.5">0311 1611100</a>
+                <div class="text-xs text-slate-400 font-light">Instant clinic appointment confirmations</div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
               <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] shrink-0">
                 <i data-lucide="clock" class="w-5 h-5"></i>
               </div>
               <div>
-                <div class="text-xs font-bold text-[#D4AF37] uppercase tracking-wider">Consultation Hours</div>
-                <div class="text-sm font-semibold text-white mt-0.5">Monday – Saturday: 11:00 AM – 9:00 PM</div>
-                <div class="text-xs text-slate-400 font-light mt-0.5">Sunday: Closed for deep sanitization & lab calibration</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/10">
-              <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 shrink-0">
-                <i data-lucide="phone" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Direct Clinical Hotline & WhatsApp</div>
-                <div class="text-sm font-semibold text-white mt-0.5">+92 311 1611100 / 0311-1611100</div>
-                <div class="text-xs text-slate-400 font-light mt-0.5">Instant appointment confirmations & WhatsApp inquiries</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Clinical Hours</div>
+                <div class="text-sm text-white font-medium mt-0.5">Monday to Saturday: 11:00 AM – 9:00 PM</div>
+                <div class="text-xs text-slate-400 font-light">Sunday: Dedicated appointments by prior notice</div>
               </div>
             </div>
           </div>
 
-          <div class="flex flex-wrap gap-3 pt-2">
-            <a href="https://wa.me/923111611100?text=Hello%20Optics%20Eleven%2C%20I%20would%20like%20to%20get%20directions%20or%20ask%20a%20question." target="_blank" class="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-              <i data-lucide="message-circle" class="w-4 h-4"></i>
-              <span>WhatsApp Concierge</span>
+          <div class="pt-2 flex flex-wrap items-center gap-3">
+            <a href="https://maps.google.com/?q=Blue+Area+Islamabad" target="_blank" class="px-6 py-3 rounded-full bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-md transition-all flex items-center gap-2">
+              <i data-lucide="navigation" class="w-4 h-4"></i>
+              <span>Open in Google Maps</span>
             </a>
-            <button onclick="copyAddress()" class="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 font-semibold text-xs border border-white/10 flex items-center gap-2">
+            <button onclick="copyAddress()" class="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold border border-white/10 transition-colors flex items-center gap-2">
               <i data-lucide="copy" class="w-4 h-4 text-[#D4AF37]"></i>
               <span id="copy-text">Copy Full Address</span>
             </button>
           </div>
         </div>
 
-        <div class="lg:col-span-6">
-          <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-[420px] bg-slate-900">
-            <!-- Simulated Map -->
-            <div class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center p-6 text-center">
-              <div class="w-14 h-14 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] flex items-center justify-center mb-4 animate-bounce">
-                <i data-lucide="map-pin" class="w-7 h-7"></i>
-              </div>
-              <h4 class="text-lg font-light text-white font-serif">Blue Area, Islamabad Location</h4>
-              <p class="text-xs text-slate-400 max-w-sm mt-2 font-light">
-                Fazal-ul-Haq Road, adjacent to Beverly Centre & Shaheed-e-Millat Metro Station.
-              </p>
-              <a href="https://maps.google.com/?q=Blue+Area+Islamabad" target="_blank" rel="noopener noreferrer" class="mt-6 px-6 py-2.5 rounded-full bg-[#D4AF37] text-[#0F172A] text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-[#e2bd45]">
-                <i data-lucide="navigation" class="w-4 h-4"></i>
-                <span>Open in Google Maps</span>
-              </a>
+        <!-- Google Map Interactive Embed -->
+        <div class="lg:col-span-7">
+          <div class="h-full min-h-[420px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-slate-900/60 relative flex flex-col justify-between">
+            <div class="w-full h-full min-h-[350px]">
+              <iframe
+                title="Optics Eleven Google Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.847334710185!2d73.0768782!3d33.7128522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbf93116556c5%3A0x6d11634df97b7cb!2sBlue%20Area%2C%20Islamabad!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+            <div class="p-4 bg-slate-900 border-t border-white/10 grid grid-cols-3 gap-3 text-xs text-slate-300 text-center">
+              <div>2 Mins from Beverly Centre</div>
+              <div>Dedicated Valet Parking</div>
+              <div>Wheelchair Accessible</div>
             </div>
           </div>
         </div>
@@ -834,135 +740,225 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12 bg-[#070D1A] border-t border-white/10 text-xs text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-          <i data-lucide="glasses" class="w-4 h-4 text-[#D4AF37]"></i>
+  <footer class="bg-[#0A0F1D] border-t border-white/5 text-slate-400 text-xs py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+            <i data-lucide="glasses" class="w-5 h-5 text-[#D4AF37]"></i>
+          </div>
+          <div>
+            <span class="text-lg font-light text-white">OPTICS <span class="text-[#D4AF37] font-serif">ELEVEN</span></span>
+            <div class="text-[10px] text-slate-400 uppercase tracking-widest">with Dr. Adil Javed • Blue Area Islamabad</div>
+          </div>
         </div>
-        <div>
-          <span class="text-sm font-semibold text-white">OPTICS ELEVEN</span>
-          <span class="text-[10px] text-slate-500 block">with Dr. Adil Javed • Blue Area Islamabad</span>
+        <div class="flex items-center gap-6 text-slate-400 text-xs">
+          <a href="#home" class="hover:text-white">Home</a>
+          <a href="#services" class="hover:text-white">Services</a>
+          <a href="#collections" class="hover:text-white">Eyewear</a>
+          <a href="#doctor" class="hover:text-white">Dr. Adil</a>
+          <a href="#booking" class="hover:text-white">Book Exam</a>
+          <a href="#contact" class="hover:text-white">Contact</a>
         </div>
       </div>
-
-      <div class="flex flex-wrap items-center justify-center gap-6 text-slate-400 text-[11px]">
-        <a href="#collections" class="hover:text-white transition-colors">Optical Products</a>
-        <a href="#doctor" class="hover:text-white transition-colors">About Dr. Adil</a>
-        <a href="#services" class="hover:text-white transition-colors">Diagnostics</a>
-        <a href="#booking" class="hover:text-white transition-colors">Book Exam</a>
-        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
-      </div>
-
-      <div class="text-slate-500 text-center sm:text-right">
-        &copy; 2026 Optics Eleven. All rights reserved. Registered Optical Center, Islamabad.
+      <div class="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 font-light">
+        <div>© 2026 Optics Eleven with Dr. Adil Javed. All Rights Reserved. Fazal-ul-Haq Road, Blue Area, Islamabad.</div>
+        <div class="flex items-center gap-4 mt-2 sm:mt-0">
+          <a href="tel:+923111611100" class="hover:text-slate-300">0311 1611100</a>
+          <span>•</span>
+          <a href="https://wa.me/923111611100" target="_blank" class="text-emerald-400 hover:underline">WhatsApp</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <!-- FLOATING WHATSAPP BUTTON -->
-  <aside aria-label="WhatsApp Concierge" class="fixed bottom-6 right-6 z-50">
-    <a href="https://wa.me/923111611100?text=Hello%20Dr.%20Adil%20Javed%2C%20I%20would%20like%20to%20inquire%20about%20optical%20services%20at%20Optics%20Eleven." target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-2xl hover:scale-105 transition-all group">
-      <i data-lucide="message-circle" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
-      <span class="hidden sm:inline">WhatsApp Dr. Adil</span>
-    </a>
-  </aside>
+  <a href="https://wa.me/923111611100?text=Hello%20Dr.%20Adil%20Javed%20%26%20Optics%20Eleven%2C%20I%20would%20like%20to%20inquire%20about%20an%20eye%20examination%20in%20Blue%20Area." target="_blank" class="fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-2xl flex items-center justify-center transition-transform hover:scale-110">
+    <i data-lucide="message-circle" class="w-6 h-6"></i>
+  </a>
 
-  <!-- 3D VIRTUAL TRY-ON MODAL -->
-  <div id="tryon-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bg-[#0F172A] border border-white/10 rounded-3xl max-w-2xl w-full p-6 space-y-6 shadow-2xl relative">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
-        <div class="flex items-center gap-2">
-          <i data-lucide="sparkles" class="w-5 h-5 text-[#D4AF37]"></i>
-          <h3 class="text-lg font-light text-white font-serif">3D Virtual Try-On Studio</h3>
+  <!-- MODAL: 3D VIRTUAL TRY-ON -->
+  <div id="tryon-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md">
+    <div class="relative w-full max-w-4xl bg-[#0F172A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
+      <!-- Modal Header -->
+      <div class="p-4 sm:p-5 bg-slate-900 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-light text-white tracking-tight">3D Virtual Try-On Studio</h3>
+            <p class="text-[10px] uppercase tracking-widest text-[#D4AF37]">Real-Time Simulator • Dr. Adil Javed Luxury Eyewear</p>
+          </div>
         </div>
-        <button onclick="closeTryOnModal()" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button onclick="closeTryOnModal()" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <!-- Studio Stage -->
-      <div class="relative h-64 sm:h-80 bg-slate-950 rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center">
-        <!-- Background Face Simulator / Placeholder -->
-        <img id="tryon-face-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Virtual Model" class="w-full h-full object-cover opacity-60">
-        
-        <!-- Overlay Frame Container -->
-        <div id="tryon-frame-container" class="absolute pointer-events-none transition-all" style="width: 58%; top: 38%;">
-          <img id="tryon-frame-img" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" alt="Frame" class="w-full object-contain drop-shadow-2xl">
+      <!-- Modal Body -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 overflow-y-auto">
+        <!-- Stage (7 cols) -->
+        <div class="lg:col-span-7 p-6 bg-[#070D1A] flex flex-col items-center justify-center relative min-h-[350px]">
+          <div class="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-slate-950 flex items-center justify-center">
+            <img id="tryon-model-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80" alt="Model Face" class="w-full h-full object-cover">
+            <div id="tryon-frame-container" class="absolute w-[68%] pointer-events-none transition-all duration-100" style="top: 36%; left: 50%; transform: translate(-50%, -50%);">
+              <img id="tryon-frame-img" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" alt="Glasses overlay" class="w-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+            </div>
+            <div class="absolute bottom-3 left-3 bg-[#0F172A]/90 px-3 py-1 rounded-full text-[10px] text-slate-300 flex items-center gap-1.5 border border-white/10">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="tryon-calib-label">Calibrated: Sovereign Titanium</span>
+            </div>
+          </div>
         </div>
 
-        <div class="absolute top-3 left-3 bg-[#0F172A]/80 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-[10px] text-[#D4AF37] font-semibold">
-          <span id="tryon-calib-label">Calibrated: Sovereign Titanium</span>
-        </div>
-      </div>
+        <!-- Controls (5 cols) -->
+        <div class="lg:col-span-5 p-5 bg-[#0F172A] border-t lg:border-t-0 lg:border-l border-white/10 space-y-4">
+          <div class="p-3.5 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="text-[10px] font-bold text-[#D4AF37] tracking-widest uppercase" id="tryon-product-brand">Tom Ford Eyewear</div>
+            <h4 class="text-sm font-light text-white mt-0.5" id="tryon-product-name">Sovereign Titanium Aviator</h4>
+            <div class="text-xs text-[#D4AF37] font-semibold mt-1" id="tryon-product-price">PKR 48,500</div>
+          </div>
 
-      <!-- Controls & Calibration -->
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <label class="block text-[11px] text-slate-400 font-semibold mb-1">Scale Frame: <span id="scale-val" class="text-white">58%</span></label>
-          <input type="range" min="40" max="80" value="58" oninput="updateFrameScale(this.value)" class="w-full accent-[#D4AF37]">
-        </div>
-        <div>
-          <label class="block text-[11px] text-slate-400 font-semibold mb-1">Bridge Position: <span id="pos-val" class="text-white">38%</span></label>
-          <input type="range" min="20" max="60" value="38" oninput="updateFramePosition(this.value)" class="w-full accent-[#D4AF37]">
-        </div>
-      </div>
+          <!-- Fit Sliders -->
+          <div class="space-y-3">
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Fit Calibration</div>
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>Frame Scale</span>
+                <span id="scale-val">68%</span>
+              </div>
+              <input type="range" min="45" max="95" value="68" oninput="updateFrameScale(this.value)" class="w-full accent-[#D4AF37]">
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>Bridge Height</span>
+                <span id="pos-val">36%</span>
+              </div>
+              <input type="range" min="20" max="60" value="36" oninput="updateFramePosition(this.value)" class="w-full accent-[#D4AF37]">
+            </div>
+          </div>
 
-      <!-- Switchable Models inside Studio -->
-      <div class="border-t border-white/10 pt-4">
-        <div class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-2">Switch Frames in Studio:</div>
-        <div class="grid grid-cols-4 gap-2">
-          <button onclick="setTryOnProduct('Tom Ford', 'Sovereign Titanium Aviator', 'PKR 48,500', 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left text-[10px] text-slate-300">
-            <span class="font-bold block text-white truncate">Tom Ford</span>
-            <span class="truncate block text-slate-400">Aviator</span>
-          </button>
-          <button onclick="setTryOnProduct('Lindberg', 'Air Titanium Rimless 9800', 'PKR 115,000', 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left text-[10px] text-slate-300">
-            <span class="font-bold block text-white truncate">Lindberg</span>
-            <span class="truncate block text-slate-400">Rimless 2.8g</span>
-          </button>
-          <button onclick="setTryOnProduct('Gucci', 'Oversized Glamour Hexagon', 'PKR 92,000', 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left text-[10px] text-slate-300">
-            <span class="font-bold block text-white truncate">Gucci</span>
-            <span class="truncate block text-slate-400">Hexagon</span>
-          </button>
-          <button onclick="setTryOnProduct('Oliver Peoples', 'Gregory Peck Intellectual Round', 'PKR 82,000', 'https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left text-[10px] text-slate-300">
-            <span class="font-bold block text-white truncate">Oliver Peoples</span>
-            <span class="truncate block text-slate-400">Round</span>
-          </button>
-        </div>
-      </div>
+          <!-- Switch Frame -->
+          <div class="space-y-2">
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Select Designer Frame</div>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="setTryOnProduct('Tom Ford', 'Sovereign Aviator', 'PKR 48,500', 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#D4AF37] text-left text-xs">
+                <div class="font-medium text-white truncate">Tom Ford Aviator</div>
+                <div class="text-[10px] text-[#D4AF37]">PKR 48,500</div>
+              </button>
+              <button onclick="setTryOnProduct('Lindberg', 'Air Titanium Rimless', 'PKR 62,000', 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#D4AF37] text-left text-xs">
+                <div class="font-medium text-white truncate">Lindberg Titanium</div>
+                <div class="text-[10px] text-[#D4AF37]">PKR 62,000</div>
+              </button>
+              <button onclick="setTryOnProduct('Ray-Ban', 'Clubmaster 24K', 'PKR 34,000', 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#D4AF37] text-left text-xs">
+                <div class="font-medium text-white truncate">Ray-Ban Clubmaster</div>
+                <div class="text-[10px] text-[#D4AF37]">PKR 34,000</div>
+              </button>
+              <button onclick="setTryOnProduct('Cartier Style', 'Prestige Titanium Rim', 'PKR 75,000', 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#D4AF37] text-left text-xs">
+                <div class="font-medium text-white truncate">Prestige Gold Rim</div>
+                <div class="text-[10px] text-[#D4AF37]">PKR 75,000</div>
+              </button>
+            </div>
+          </div>
 
-      <!-- Action -->
-      <div class="flex items-center justify-between pt-2 border-t border-white/10">
-        <div>
-          <span id="tryon-product-brand" class="text-xs font-bold text-[#D4AF37] uppercase">Tom Ford</span>
-          <div id="tryon-product-name" class="text-sm font-semibold text-white">Sovereign Titanium Aviator</div>
-          <span id="tryon-product-price" class="text-xs text-slate-300 font-bold">PKR 48,500</span>
+          <!-- Bottom Actions -->
+          <div class="pt-3 border-t border-white/10 space-y-2">
+            <button onclick="closeTryOnModal(); window.location.href='#booking'" class="w-full py-2.5 rounded-full bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-md transition-all">
+              Book In-Person Fitting in Blue Area
+            </button>
+            <a id="tryon-wa-link" href="https://wa.me/923111611100?text=Hello%20Dr.%20Adil%2C%20I%20tested%20a%20frame%20in%20your%20Virtual%20Studio%20and%20want%20to%20reserve%20it." target="_blank" class="w-full py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-[#D4AF37] flex items-center justify-center gap-1.5 transition-colors">
+              <span>Reserve Frame via WhatsApp</span>
+            </a>
+          </div>
         </div>
-        <a id="tryon-wa-link" href="https://wa.me/923111611100?text=Hello%20Dr.%20Adil%20Javed%2C%20I%20tried%20on%20the%20Tom%20Ford%20Sovereign%20Titanium%20Aviator%20and%20would%20like%20to%20reserve%20it." target="_blank" class="px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2">
-          <i data-lucide="message-circle" class="w-4 h-4"></i>
-          <span>Order via WhatsApp</span>
-        </a>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- MODAL: DIGITAL VISION SCREENER -->
+  <div id="screener-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md">
+    <div class="relative w-full max-w-xl bg-[#0F172A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
+      <!-- Header -->
+      <div class="p-5 bg-slate-900 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
+            <i data-lucide="eye" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-light text-white tracking-tight">Digital Vision Screener</h3>
+            <p class="text-[10px] uppercase tracking-widest text-[#D4AF37]">Preliminary Interactive Eye Check</p>
+          </div>
+        </div>
+        <button onclick="closeScreenerModal()" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Screener Stage -->
+      <div class="p-6 space-y-6">
+        <div class="text-center space-y-1">
+          <span class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest">Acuity & Astigmatism Check</span>
+          <h4 class="text-lg font-light text-white">Which direction do the prongs of the 'E' point?</h4>
+          <p class="text-xs text-slate-400 font-light">Hold device at arm's length (40cm) with one eye covered.</p>
+        </div>
+
+        <div class="h-36 rounded-2xl bg-white flex items-center justify-center shadow-inner select-none">
+          <span class="text-7xl font-black text-slate-950 transform rotate-90 inline-block">E</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <button onclick="recordAcuity('Right')" class="p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200">Right (Horizontal)</button>
+          <button onclick="recordAcuity('Down')" class="p-2.5 rounded-full bg-[#D4AF37] text-[#0F172A] font-bold text-xs shadow-md">Down (Vertical)</button>
+          <button onclick="recordAcuity('Left')" class="p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200">Left (Horizontal)</button>
+          <button onclick="recordAcuity('Up')" class="p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200">Up (Vertical)</button>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 text-xs text-slate-300 space-y-2">
+          <div class="font-semibold text-[#D4AF37] flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+            <span>Clinical Evaluation from Dr. Adil Javed</span>
+          </div>
+          <p class="leading-relaxed font-light">
+            Online screening detects approximate acuity. For a verified prescription, intraocular pressure screening, and retinal inspection, schedule your diagnostic test at Optics Eleven.
+          </p>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button onclick="closeScreenerModal()" class="px-4 py-2 rounded-full text-xs text-slate-400 hover:text-white">Close</button>
+          <button onclick="closeScreenerModal(); window.location.href='#booking'" class="px-5 py-2.5 rounded-full bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-md">
+            Schedule Exam with Dr. Adil
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMBEDDED JAVASCRIPT LOGIC -->
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Mobile Menu Toggle
+    // Mobile Menu
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
     }
 
-    // Modal Control: Try-On Studio
+    // Modal Control: Try-On
     function openTryOnModal() {
       document.getElementById('tryon-modal').classList.remove('hidden');
     }
     function closeTryOnModal() {
       document.getElementById('tryon-modal').classList.add('hidden');
+    }
+
+    // Modal Control: Screener
+    function openScreenerModal() {
+      document.getElementById('screener-modal').classList.remove('hidden');
+    }
+    function closeScreenerModal() {
+      document.getElementById('screener-modal').classList.add('hidden');
     }
 
     // Try-On Controls
@@ -984,6 +980,10 @@
       document.getElementById('tryon-calib-label').textContent = 'Calibrated: ' + name;
       const waMsg = encodeURIComponent('Hello Dr. Adil Javed & Optics Eleven, I tried on the ' + name + ' (' + brand + ') in your Virtual Studio and would like to reserve it.');
       document.getElementById('tryon-wa-link').href = 'https://wa.me/923111611100?text=' + waMsg;
+    }
+
+    function recordAcuity(choice) {
+      alert('Selected orientation: ' + choice + '. Visual acuity logged. Proceed to clinical exam booking for verified optical prescription.');
     }
 
     // Copy Address
