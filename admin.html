@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optics Eleven | Executive Optical & Clinic Administration Suite</title>
+  <meta name="description" content="Administration, inventory control, and order fulfillment system for Optics Eleven with Dr. Adil Javed, Blue Area, Islamabad." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              DEFAULT: '#D4AF37',
+              light: '#f3e5ab',
+              dark: '#997d26'
+            },
+            slate: {
+              950: '#070D1A',
+              900: '#0F172A',
+              850: '#131D31',
+              800: '#1E293B'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            luxury: ['Cinzel', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #070D1A; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; border: 1px solid rgba(212,175,55,0.2); }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+  </style>
+</head>
+<body class="bg-[#070D1A] text-slate-100 font-sans antialiased selection:bg-[#D4AF37] selection:text-[#070D1A]">
+
+  <!-- TOP BAR -->
+  <header class="sticky top-0 z-40 bg-[#0F172A]/95 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#D4AF37]/20 to-transparent border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] shadow-lg shadow-[#D4AF37]/10">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-lg font-bold text-white tracking-tight">OPTICS <span class="text-[#D4AF37]">ELEVEN</span></span>
+            <span class="px-2 py-0.5 rounded-md bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider">Admin Portal</span>
+          </div>
+          <div class="text-[11px] text-slate-400">Dr. Adil Javed • Blue Area, Islamabad</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>System Active • LocalStorage Synced</span>
+        </div>
+        <button onclick="resetToDefaults()" title="Reset to default initial data" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 flex items-center gap-1.5 transition-colors">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span class="hidden sm:inline">Reset Demo</span>
+        </button>
+        <button onclick="openProductModal()" class="px-4 py-2 rounded-xl bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-lg shadow-[#D4AF37]/20 flex items-center gap-2 transition-all">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Add Frame</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- KPI STATS CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="p-5 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl relative overflow-hidden">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
+          <span>Total Products</span>
+          <i data-lucide="glasses" class="w-4 h-4 text-[#D4AF37]"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-white" id="stat-total-products">0</div>
+        <div class="text-xs text-slate-400 mt-1 flex items-center gap-1">
+          <span class="text-emerald-400 font-medium" id="stat-instock-products">0</span> in stock
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl relative overflow-hidden">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
+          <span>Total Inventory Units</span>
+          <i data-lucide="layers" class="w-4 h-4 text-[#D4AF37]"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-white" id="stat-total-stock">0</div>
+        <div class="text-xs text-slate-400 mt-1">Available across all frames</div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl relative overflow-hidden">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
+          <span>Catalog Value</span>
+          <i data-lucide="badge-dollar-sign" class="w-4 h-4 text-emerald-400"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-white" id="stat-catalog-val">PKR 0</div>
+        <div class="text-xs text-slate-400 mt-1">Based on active stock prices</div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl relative overflow-hidden">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
+          <span>Orders / Reservations</span>
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-[#D4AF37]"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-white" id="stat-total-orders">0</div>
+        <div class="text-xs text-slate-400 mt-1 flex items-center gap-1">
+          <span class="text-[#D4AF37] font-medium" id="stat-pending-orders">0 pending</span> fulfillment
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="flex items-center gap-2 border-b border-white/10 pb-2">
+      <button onclick="switchTab('inventory')" id="tab-btn-inventory" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#D4AF37] text-[#0F172A] transition-all flex items-center gap-2 shadow-md">
+        <i data-lucide="glasses" class="w-4 h-4"></i>
+        <span>Frames Inventory</span>
+      </button>
+      <button onclick="switchTab('orders')" id="tab-btn-orders" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+        <i data-lucide="package-check" class="w-4 h-4"></i>
+        <span>Customer Orders</span>
+      </button>
+      <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+        <span>Store Analytics</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: INVENTORY & PRODUCTS -->
+    <div id="tab-inventory" class="space-y-4">
+      <div class="p-4 rounded-2xl bg-[#0F172A] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="relative w-full md:w-96">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input
+            type="text"
+            id="search-input"
+            oninput="renderProductsTable()"
+            placeholder="Search by name, brand, shape or material..."
+            class="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
+          />
+        </div>
+
+        <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+          <select id="brand-filter" onchange="renderProductsTable()" class="px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-[#D4AF37]">
+            <option value="ALL">All Brands</option>
+            <option value="Tom Ford">Tom Ford</option>
+            <option value="Lindberg">Lindberg</option>
+            <option value="Gucci">Gucci</option>
+            <option value="Oliver Peoples">Oliver Peoples</option>
+            <option value="Ray-Ban">Ray-Ban</option>
+          </select>
+
+          <select id="stock-filter" onchange="renderProductsTable()" class="px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-[#D4AF37]">
+            <option value="ALL">All Stock Status</option>
+            <option value="INSTOCK">In Stock Only</option>
+            <option value="LOWSTOCK">Low Stock (≤ 3 units)</option>
+            <option value="OUTOFSTOCK">Out of Stock</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-[#0F172A] border border-white/10 overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-950/80 border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="py-3.5 px-4">Item & Visual</th>
+                <th class="py-3.5 px-4">Category & Shape</th>
+                <th class="py-3.5 px-4">Unit Price</th>
+                <th class="py-3.5 px-4 text-center">Stock Count</th>
+                <th class="py-3.5 px-4">Status</th>
+                <th class="py-3.5 px-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body" class="divide-y divide-white/5"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: ORDERS MANAGEMENT -->
+    <div id="tab-orders" class="space-y-4 hidden">
+      <div class="p-4 rounded-2xl bg-[#0F172A] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-sm font-semibold text-white flex items-center gap-2">
+          <span>Customer Eyewear Orders & Consultations</span>
+          <span class="px-2 py-0.5 rounded-full bg-white/10 text-[11px] text-[#D4AF37]" id="orders-badge-count">0</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <select id="orders-status-filter" onchange="renderOrdersTable()" class="px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-[#D4AF37]">
+            <option value="ALL">All Order Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <button onclick="openNewOrderModal()" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition-colors">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Log Order</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-[#0F172A] border border-white/10 overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-950/80 border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="py-3.5 px-4">Order ID & Date</th>
+                <th class="py-3.5 px-4">Customer Details</th>
+                <th class="py-3.5 px-4">Items Reserved</th>
+                <th class="py-3.5 px-4">Amount</th>
+                <th class="py-3.5 px-4">Fulfillment Status</th>
+                <th class="py-3.5 px-4 text-right">Quick Contact</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body" class="divide-y divide-white/5"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: STORE ANALYTICS -->
+    <div id="tab-analytics" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <h3 class="font-bold text-white text-sm">Inventory by Designer Brand</h3>
+            <i data-lucide="pie-chart" class="w-4 h-4 text-[#D4AF37]"></i>
+          </div>
+          <div id="brand-analytics-list" class="space-y-3"></div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <h3 class="font-bold text-white text-sm">Attention Required (Low or Out of Stock)</h3>
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+          </div>
+          <div id="low-stock-alert-list" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-gradient-to-r from-[#0F172A] to-slate-900 border border-[#D4AF37]/30 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h4 class="text-sm font-bold text-white">Database Backup & Export</h4>
+          <p class="text-xs text-slate-400 mt-0.5">Export current inventory and orders as a formatted JSON document for backup.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="exportData()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-colors">
+            <i data-lucide="download" class="w-4 h-4 text-[#D4AF37]"></i>
+            <span>Download JSON Backup</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: ADD / EDIT PRODUCT -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md">
+    <div class="relative w-full max-w-2xl bg-[#0F172A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
+      <div class="p-5 bg-slate-900 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37]">
+            <i data-lucide="glasses" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white" id="modal-product-title">Add New Eyewear Frame</h3>
+            <p class="text-[11px] text-[#D4AF37]">Optics Eleven Blue Area Inventory System</p>
+          </div>
+        </div>
+        <button onclick="closeProductModal()" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="product-form" onsubmit="handleProductSubmit(event)" class="p-6 space-y-4 overflow-y-auto">
+        <input type="hidden" id="pf-id" value="">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Frame Name *</label>
+            <input type="text" id="pf-name" required placeholder="e.g. Sovereign Aviator" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Brand Name *</label>
+            <input type="text" id="pf-brand" required placeholder="e.g. Tom Ford Eyewear" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Price (PKR) *</label>
+            <input type="number" id="pf-price" required min="1000" step="500" placeholder="e.g. 48500" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Stock Units *</label>
+            <input type="number" id="pf-stock" required min="0" value="5" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Frame Shape</label>
+            <select id="pf-shape" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+              <option>Aviator</option>
+              <option>Round</option>
+              <option>Hexagonal</option>
+              <option>Square</option>
+              <option>Cat-Eye</option>
+              <option>Rimless</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Material</label>
+            <input type="text" id="pf-material" placeholder="e.g. Japanese Beta-Titanium" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Image URL</label>
+          <div class="flex gap-2">
+            <input type="url" id="pf-image" oninput="previewProductImage(this.value)" placeholder="https://images.unsplash.com/..." class="flex-1 px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+            <div class="w-11 h-11 rounded-xl bg-slate-950 border border-white/10 p-1 flex items-center justify-center overflow-hidden shrink-0">
+              <img id="pf-preview-img" src="" alt="preview" class="w-full h-full object-contain hidden">
+              <i id="pf-preview-icon" data-lucide="glasses" class="w-5 h-5 text-slate-500"></i>
+            </div>
+          </div>
+          <div class="text-[10px] text-slate-500 mt-1">Leave empty to use high-resolution luxury default eyewear photograph.</div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Optical Description</label>
+          <textarea id="pf-desc" rows="2" placeholder="Brief technical specifications and aesthetic notes..." class="w-full px-3.5 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]"></textarea>
+        </div>
+
+        <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-slate-300">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-lg transition-all flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span id="pf-submit-btn-text">Save Frame</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: LOG NEW ORDER -->
+  <div id="order-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md">
+    <div class="relative w-full max-w-lg bg-[#0F172A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
+      <div class="p-5 bg-slate-900 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Log Walk-in / Phone Order</h3>
+            <p class="text-[11px] text-emerald-400">Direct Customer Reservation</p>
+          </div>
+        </div>
+        <button onclick="closeNewOrderModal()" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="order-form" onsubmit="handleOrderSubmit(event)" class="p-6 space-y-4 overflow-y-auto">
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Customer Full Name *</label>
+          <input type="text" id="of-name" required placeholder="e.g. Asad Malik" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">WhatsApp / Phone *</label>
+          <input type="tel" id="of-phone" required placeholder="e.g. 0311 1611100" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Select Frame *</label>
+          <select id="of-product" required class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]"></select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Initial Status</label>
+          <select id="of-status" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+            <option>Pending</option>
+            <option>Confirmed</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
+          </select>
+        </div>
+
+        <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeNewOrderModal()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-slate-300">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg transition-all flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Log Customer Order</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC & STATE PERSISTENCE -->
+  <script>
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'oe-tf-01',
+        name: 'Sovereign Titanium Aviator',
+        brand: 'Tom Ford',
+        shape: 'Aviator',
+        material: 'Japanese Beta-Titanium',
+        priceNumeric: 48500,
+        stockCount: 6,
+        image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80',
+        description: 'Ultralight aerospace titanium with hand-finished acetate temple tips.'
+      },
+      {
+        id: 'oe-lb-02',
+        name: 'Air Titanium Rimless 9800',
+        brand: 'Lindberg',
+        shape: 'Rimless',
+        material: 'Pure Danish Titanium Wire',
+        priceNumeric: 115000,
+        stockCount: 2,
+        image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80',
+        description: 'Screwless Danish engineering weighing only 2.8 grams.'
+      },
+      {
+        id: 'oe-gc-03',
+        name: 'Oversized Glamour Hexagon',
+        brand: 'Gucci',
+        shape: 'Hexagonal',
+        material: 'Italian Mazzucchelli Acetate',
+        priceNumeric: 92000,
+        stockCount: 4,
+        image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80',
+        description: 'Statement geometric luxury eyewear with interlocking double G logo temples.'
+      },
+      {
+        id: 'oe-op-04',
+        name: 'Gregory Peck Intellectual Round',
+        brand: 'Oliver Peoples',
+        shape: 'Round',
+        material: 'Hand-Layered Acetate & Filigree Core',
+        priceNumeric: 82000,
+        stockCount: 5,
+        image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=600&q=80',
+        description: 'Retro round silhouette with custom hand-carved filigree wire core.'
+      },
+      {
+        id: 'oe-rb-05',
+        name: 'Clubmaster Classic 24K Edition',
+        brand: 'Ray-Ban',
+        shape: 'Square',
+        material: 'Gold Electroplate & Ebony Acetate',
+        priceNumeric: 36500,
+        stockCount: 8,
+        image: 'https://images.unsplash.com/photo-1509695503492-412296d91665?auto=format&fit=crop&w=600&q=80',
+        description: 'Timeless browline silhouette with mineral glass optical lenses.'
+      }
+    ];
+
+    const DEFAULT_ORDERS = [
+      {
+        id: 'ORD-8812',
+        customerName: 'Hamza Tariq (F-7 Islamabad)',
+        customerPhone: '03001234567',
+        productName: 'Sovereign Titanium Aviator',
+        brand: 'Tom Ford',
+        amount: 48500,
+        status: 'Pending',
+        date: '2026-09-12'
+      },
+      {
+        id: 'ORD-8813',
+        customerName: 'Barrister Asad Qureshi',
+        customerPhone: '03119876543',
+        productName: 'Air Titanium Rimless 9800',
+        brand: 'Lindberg',
+        amount: 115000,
+        status: 'Confirmed',
+        date: '2026-09-11'
+      }
+    ];
+
+    const LS_KEY_PRODUCTS = 'oe_admin_products';
+    const LS_KEY_ORDERS = 'oe_admin_orders';
+
+    let products = [];
+    let orders = [];
+
+    function initData() {
+      try {
+        const savedProd = localStorage.getItem(LS_KEY_PRODUCTS);
+        products = savedProd ? JSON.parse(savedProd) : [...DEFAULT_PRODUCTS];
+      } catch (e) {
+        products = [...DEFAULT_PRODUCTS];
+      }
+
+      try {
+        const savedOrd = localStorage.getItem(LS_KEY_ORDERS);
+        orders = savedOrd ? JSON.parse(savedOrd) : [...DEFAULT_ORDERS];
+      } catch (e) {
+        orders = [...DEFAULT_ORDERS];
+      }
+      saveAndRender();
+    }
+
+    function saveAndRender() {
+      localStorage.setItem(LS_KEY_PRODUCTS, JSON.stringify(products));
+      localStorage.setItem(LS_KEY_ORDERS, JSON.stringify(orders));
+      updateKPIs();
+      renderProductsTable();
+      renderOrdersTable();
+      renderAnalytics();
+      lucide.createIcons();
+    }
+
+    function resetToDefaults() {
+      if (confirm('Reset all products and orders to default factory state?')) {
+        products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+        orders = JSON.parse(JSON.stringify(DEFAULT_ORDERS));
+        saveAndRender();
+      }
+    }
+
+    function switchTab(tab) {
+      document.getElementById('tab-inventory').classList.add('hidden');
+      document.getElementById('tab-orders').classList.add('hidden');
+      document.getElementById('tab-analytics').classList.add('hidden');
+
+      const tabs = ['inventory', 'orders', 'analytics'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-btn-' + t);
+        if (t === tab) {
+          btn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#D4AF37] text-[#0F172A] transition-all flex items-center gap-2 shadow-md';
+        } else {
+          btn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2';
+        }
+      });
+
+      document.getElementById('tab-' + tab).classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function updateKPIs() {
+      const totalProds = products.length;
+      const inStockProds = products.filter(p => p.stockCount > 0).length;
+      const totalUnits = products.reduce((acc, cur) => acc + Number(cur.stockCount || 0), 0);
+      const totalVal = products.reduce((acc, cur) => acc + (Number(cur.stockCount || 0) * Number(cur.priceNumeric || 0)), 0);
+      const totalOrders = orders.length;
+      const pendingOrders = orders.filter(o => o.status === 'Pending').length;
+
+      document.getElementById('stat-total-products').textContent = totalProds;
+      document.getElementById('stat-instock-products').textContent = inStockProds;
+      document.getElementById('stat-total-stock').textContent = totalUnits;
+      document.getElementById('stat-catalog-val').textContent = 'PKR ' + totalVal.toLocaleString();
+      document.getElementById('stat-total-orders').textContent = totalOrders;
+      document.getElementById('stat-pending-orders').textContent = pendingOrders + ' pending';
+      document.getElementById('orders-badge-count').textContent = totalOrders;
+    }
+
+    function renderProductsTable() {
+      const tbody = document.getElementById('products-table-body');
+      const search = document.getElementById('search-input').value.toLowerCase().trim();
+      const brand = document.getElementById('brand-filter').value;
+      const stock = document.getElementById('stock-filter').value;
+
+      const filtered = products.filter(p => {
+        const matchesSearch = !search || 
+          p.name.toLowerCase().includes(search) || 
+          p.brand.toLowerCase().includes(search) ||
+          p.shape.toLowerCase().includes(search) ||
+          (p.material && p.material.toLowerCase().includes(search));
+
+        const matchesBrand = brand === 'ALL' || p.brand.toLowerCase().includes(brand.toLowerCase());
+
+        let matchesStock = true;
+        if (stock === 'INSTOCK') matchesStock = p.stockCount > 0;
+        if (stock === 'LOWSTOCK') matchesStock = p.stockCount > 0 && p.stockCount <= 3;
+        if (stock === 'OUTOFSTOCK') matchesStock = p.stockCount === 0;
+
+        return matchesSearch && matchesBrand && matchesStock;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-12 text-center text-slate-500">
+              <div class="flex flex-col items-center justify-center gap-2">
+                <i data-lucide="inbox" class="w-8 h-8 text-slate-600"></i>
+                <span>No frames match the current search or filters.</span>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(p => {
+        const isLow = p.stockCount > 0 && p.stockCount <= 3;
+        const isOut = p.stockCount === 0;
+        let badgeClass = 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+        let badgeText = 'In Stock';
+        if (isLow) {
+          badgeClass = 'bg-amber-500/15 text-amber-400 border border-amber-500/30';
+          badgeText = 'Low Stock';
+        } else if (isOut) {
+          badgeClass = 'bg-rose-500/15 text-rose-400 border border-rose-500/30';
+          badgeText = 'Out of Stock';
+        }
+
+        return `
+          <tr class="hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-10 rounded-lg bg-slate-950 border border-white/10 p-1 flex items-center justify-center overflow-hidden shrink-0">
+                  ${p.image && p.image.trim() ? `<img src="${p.image.trim()}" alt="${p.name}" class="w-full h-full object-contain">` : `<i data-lucide="glasses" class="w-5 h-5 text-slate-500"></i>`}
+                </div>
+                <div>
+                  <div class="font-bold text-white text-xs sm:text-sm line-clamp-1">${p.name}</div>
+                  <div class="text-[11px] text-[#D4AF37] font-semibold">${p.brand}</div>
+                </div>
+              </div>
+            </td>
+
+            <td class="py-3 px-4">
+              <div class="text-white">${p.shape || 'Standard'}</div>
+              <div class="text-[10px] text-slate-400 line-clamp-1">${p.material || 'Optical Grade'}</div>
+            </td>
+
+            <td class="py-3 px-4 font-mono font-bold text-[#D4AF37]">
+              PKR ${Number(p.priceNumeric).toLocaleString()}
+            </td>
+
+            <td class="py-3 px-4 text-center">
+              <div class="inline-flex items-center gap-1.5 bg-slate-950 border border-white/10 rounded-lg px-2 py-1">
+                <button onclick="adjustStock('${p.id}', -1)" title="Decrease stock" class="w-5 h-5 flex items-center justify-center text-slate-400 hover:text-white bg-white/5 rounded">-</button>
+                <span class="w-8 text-center font-bold text-white font-mono">${p.stockCount}</span>
+                <button onclick="adjustStock('${p.id}', 1)" title="Increase stock" class="w-5 h-5 flex items-center justify-center text-slate-400 hover:text-white bg-white/5 rounded">+</button>
+              </div>
+            </td>
+
+            <td class="py-3 px-4">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${badgeClass}">${badgeText}</span>
+            </td>
+
+            <td class="py-3 px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="editProduct('${p.id}')" title="Edit Frame" class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white">
+                  <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                </button>
+                <button onclick="deleteProduct('${p.id}')" title="Delete Frame" class="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderOrdersTable() {
+      const tbody = document.getElementById('orders-table-body');
+      const filter = document.getElementById('orders-status-filter').value;
+
+      const filtered = orders.filter(o => filter === 'ALL' || o.status === filter);
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="py-12 text-center text-slate-500">No orders found for the selected status.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(o => {
+        let badgeColor = 'bg-amber-500/15 text-amber-400 border-amber-500/30';
+        if (o.status === 'Confirmed') badgeColor = 'bg-blue-500/15 text-blue-400 border-blue-500/30';
+        if (o.status === 'Shipped') badgeColor = 'bg-purple-500/15 text-purple-400 border-purple-500/30';
+        if (o.status === 'Delivered') badgeColor = 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
+        if (o.status === 'Cancelled') badgeColor = 'bg-rose-500/15 text-rose-400 border-rose-500/30';
+
+        const waText = encodeURIComponent(`Hello ${o.customerName}, this is Optics Eleven (Dr. Adil Javed, Blue Area). Regarding your order (${o.productName}), current status: ${o.status}.`);
+
+        return `
+          <tr class="hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4">
+              <div class="font-bold text-white font-mono">${o.id}</div>
+              <div class="text-[10px] text-slate-400">${o.date}</div>
+            </td>
+
+            <td class="py-3 px-4">
+              <div class="font-semibold text-white">${o.customerName}</div>
+              <div class="text-[11px] text-slate-400 font-mono">${o.customerPhone}</div>
+            </td>
+
+            <td class="py-3 px-4">
+              <div class="text-[#D4AF37] font-semibold">${o.brand}</div>
+              <div class="text-white text-xs">${o.productName}</div>
+            </td>
+
+            <td class="py-3 px-4 font-mono font-bold text-white">
+              PKR ${Number(o.amount).toLocaleString()}
+            </td>
+
+            <td class="py-3 px-4">
+              <select onchange="updateOrderStatus('${o.id}', this.value)" class="px-2 py-1 rounded-lg text-xs font-bold border ${badgeColor} bg-slate-950 focus:outline-none">
+                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Confirmed" ${o.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+              </select>
+            </td>
+
+            <td class="py-3 px-4 text-right">
+              <div class="flex items-center justify-end gap-2">
+                <a href="https://wa.me/${o.customerPhone.replace(/[^0-9]/g, '')}?text=${waText}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-[11px] flex items-center gap-1 transition-colors">
+                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                  <span>WhatsApp</span>
+                </a>
+                <button onclick="deleteOrder('${o.id}')" title="Delete Order" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400">
+                  <i data-lucide="trash" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderAnalytics() {
+      const brandCounts = {};
+      products.forEach(p => {
+        brandCounts[p.brand] = (brandCounts[p.brand] || 0) + 1;
+      });
+
+      const brandList = document.getElementById('brand-analytics-list');
+      brandList.innerHTML = Object.keys(brandCounts).map(b => {
+        const count = brandCounts[b];
+        const pct = Math.round((count / products.length) * 100);
+        return `
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-white font-medium">${b}</span>
+              <span class="text-[#D4AF37] font-mono">${count} frames (${pct}%)</span>
+            </div>
+            <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-white/5">
+              <div class="h-full bg-gradient-to-r from-[#D4AF37] to-amber-500 rounded-full" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const lowList = document.getElementById('low-stock-alert-list');
+      const lowItems = products.filter(p => p.stockCount <= 3);
+
+      if (lowItems.length === 0) {
+        lowList.innerHTML = `
+          <div class="text-center py-6 text-emerald-400 text-xs flex items-center justify-center gap-2">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <span>All frames have healthy stock levels (> 3 units).</span>
+          </div>
+        `;
+      } else {
+        lowList.innerHTML = lowItems.map(p => `
+          <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center">
+                ${p.image ? `<img src="${p.image}" class="w-full h-full object-contain">` : `<i data-lucide="glasses" class="w-4 h-4 text-slate-500"></i>`}
+              </div>
+              <div>
+                <div class="font-bold text-white text-xs">${p.name}</div>
+                <div class="text-[10px] text-slate-400">${p.brand}</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${p.stockCount === 0 ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'}">
+                ${p.stockCount === 0 ? '0 Units' : p.stockCount + ' Left'}
+              </span>
+              <button onclick="adjustStock('${p.id}', 3)" class="px-2 py-1 bg-white/5 hover:bg-white/10 rounded text-[10px] text-[#D4AF37] font-semibold border border-white/10">
+                +3 Stock
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      lucide.createIcons();
+    }
+
+    function adjustStock(id, delta) {
+      const prod = products.find(p => p.id === id);
+      if (!prod) return;
+      prod.stockCount = Math.max(0, (prod.stockCount || 0) + delta);
+      saveAndRender();
+    }
+
+    function openProductModal() {
+      document.getElementById('product-form').reset();
+      document.getElementById('pf-id').value = '';
+      document.getElementById('modal-product-title').textContent = 'Add New Eyewear Frame';
+      document.getElementById('pf-submit-btn-text').textContent = 'Save Frame';
+      previewProductImage('');
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function editProduct(id) {
+      const prod = products.find(p => p.id === id);
+      if (!prod) return;
+      document.getElementById('pf-id').value = prod.id;
+      document.getElementById('pf-name').value = prod.name;
+      document.getElementById('pf-brand').value = prod.brand;
+      document.getElementById('pf-price').value = prod.priceNumeric;
+      document.getElementById('pf-stock').value = prod.stockCount;
+      document.getElementById('pf-shape').value = prod.shape || 'Aviator';
+      document.getElementById('pf-material').value = prod.material || '';
+      document.getElementById('pf-image').value = prod.image || '';
+      document.getElementById('pf-desc').value = prod.description || '';
+
+      document.getElementById('modal-product-title').textContent = 'Edit ' + prod.name;
+      document.getElementById('pf-submit-btn-text').textContent = 'Update Frame';
+      previewProductImage(prod.image || '');
+
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function previewProductImage(url) {
+      const img = document.getElementById('pf-preview-img');
+      const icon = document.getElementById('pf-preview-icon');
+      if (url && url.trim()) {
+        img.src = url.trim();
+        img.classList.remove('hidden');
+        icon.classList.add('hidden');
+      } else {
+        img.classList.add('hidden');
+        icon.classList.remove('hidden');
+      }
+    }
+
+    function handleProductSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('pf-id').value;
+      const name = document.getElementById('pf-name').value.trim();
+      const brand = document.getElementById('pf-brand').value.trim();
+      const priceNumeric = Number(document.getElementById('pf-price').value);
+      const stockCount = Number(document.getElementById('pf-stock').value);
+      const shape = document.getElementById('pf-shape').value;
+      const material = document.getElementById('pf-material').value.trim();
+      const image = document.getElementById('pf-image').value.trim() || 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80';
+      const description = document.getElementById('pf-desc').value.trim();
+
+      if (id) {
+        const idx = products.findIndex(p => p.id === id);
+        if (idx !== -1) {
+          products[idx] = { ...products[idx], name, brand, priceNumeric, stockCount, shape, material, image, description };
+        }
+      } else {
+        const newId = 'oe-' + Date.now().toString(36);
+        products.unshift({ id: newId, name, brand, priceNumeric, stockCount, shape, material, image, description });
+      }
+
+      closeProductModal();
+      saveAndRender();
+    }
+
+    function deleteProduct(id) {
+      if (confirm('Delete this frame from the catalog?')) {
+        products = products.filter(p => p.id !== id);
+        saveAndRender();
+      }
+    }
+
+    function openNewOrderModal() {
+      const select = document.getElementById('of-product');
+      select.innerHTML = products.map(p => `
+        <option value="${p.id}">${p.brand} - ${p.name} (PKR ${p.priceNumeric.toLocaleString()})</option>
+      `).join('');
+      document.getElementById('order-modal').classList.remove('hidden');
+    }
+
+    function closeNewOrderModal() {
+      document.getElementById('order-modal').classList.add('hidden');
+    }
+
+    function handleOrderSubmit(e) {
+      e.preventDefault();
+      const prodId = document.getElementById('of-product').value;
+      const prod = products.find(p => p.id === prodId);
+      if (!prod) return;
+
+      const newOrder = {
+        id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
+        customerName: document.getElementById('of-name').value.trim(),
+        customerPhone: document.getElementById('of-phone').value.trim(),
+        productName: prod.name,
+        brand: prod.brand,
+        amount: prod.priceNumeric,
+        status: document.getElementById('of-status').value,
+        date: new Date().toISOString().split('T')[0]
+      };
+
+      orders.unshift(newOrder);
+      if (prod.stockCount > 0) {
+        prod.stockCount -= 1;
+      }
+
+      closeNewOrderModal();
+      saveAndRender();
+      switchTab('orders');
+    }
+
+    function updateOrderStatus(id, newStatus) {
+      const ord = orders.find(o => o.id === id);
+      if (ord) {
+        ord.status = newStatus;
+        saveAndRender();
+      }
+    }
+
+    function deleteOrder(id) {
+      if (confirm('Remove this customer order record?')) {
+        orders = orders.filter(o => o.id !== id);
+        saveAndRender();
+      }
+    }
+
+    function exportData() {
+      const data = {
+        clinic: 'Optics Eleven with Dr. Adil Javed',
+        location: 'Blue Area, Islamabad',
+        exportTimestamp: new Date().toISOString(),
+        products,
+        orders
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `optics-eleven-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    window.addEventListener('DOMContentLoaded', initData);
+  </script>
+</body>
+</html>
