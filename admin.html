@@ -985,7 +985,8 @@ if (productForm) {
     e.preventDefault();
 
     const title = document.getElementById('title').value.trim();
-     const price = parseFloat(document.getElementById('pf-price').value);
+       const title = document.getElementById('pf-name') ? document.getElementById('pf-name').value : '';
+  const price = document.getElementById('pf-price') ? parseFloat(document.getElementById('pf-price').value) : 0;
   const fileInput = document.getElementById('pf-image-file');
   const file = fileInput ? fileInput.files[0] : null;
 
@@ -998,7 +999,7 @@ if (productForm) {
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
 
-    // 1. Supabase Storage Bucket Mein Upload
+    // 1. Storage Bucket Mein Upload
     const { data: storageData, error: storageError } = await _supabase.storage
       .from('product-images')
       .upload(fileName, file);
@@ -1026,11 +1027,14 @@ if (productForm) {
     if (dbError) throw dbError;
 
     alert("Product aur Image successfully save ho gaye!");
-    productForm.reset();
+    if (typeof productForm !== 'undefined') productForm.reset();
     location.reload();
 
   } catch (error) {
     alert("Error: " + error.message);
+  }
+});
+
   }
 });
  
