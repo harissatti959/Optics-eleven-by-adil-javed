@@ -341,16 +341,16 @@
         </div>
 
         <div>
-          <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Image URL</label>
-          <div class="flex gap-2">
-            <input type="url" id="pf-image" oninput="previewProductImage(this.value)" placeholder="https://images.unsplash.com/..." class="flex-1 px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]">
-            <div class="w-11 h-11 rounded-xl bg-slate-950 border border-white/10 p-1 flex items-center justify-center overflow-hidden shrink-0">
-              <img id="pf-preview-img" src="" alt="preview" class="w-full h-full object-contain hidden">
-              <i id="pf-preview-icon" data-lucide="glasses" class="w-5 h-5 text-slate-500"></i>
-            </div>
-          </div>
-          <div class="text-[10px] text-slate-500 mt-1">Leave empty to use high-resolution luxury default eyewear photograph.</div>
-        </div>
+  <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Upload Product Photo *</label>
+  <input 
+    type="file" 
+    id="pf-image-file" 
+    accept="image/*" 
+    class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer border border-slate-700 rounded-lg bg-slate-800/80 p-2"
+    required
+  />
+</div>
+
 
         <div>
           <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Optical Description</label>
@@ -985,52 +985,55 @@ if (productForm) {
     e.preventDefault();
 
     const title = document.getElementById('title').value.trim();
-    const price = document.getElementById('price').value;
-    const fileInput = document.getElementById('imageFile');
-    const file = fileInput.files[0];
+     const price = parseFloat(document.getElementById('pf-price').value);
+  const fileInput = document.getElementById('pf-image-file');
+  const file = fileInput ? fileInput.files[0] : null;
 
-    if (!file) {
-      alert("Pehle image select karein!");
-      return;
-    }
+  if (!file) {
+    alert("Pehle gallery se image select karein!");
+    return;
+  }
 
-    try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+  try {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
 
-      const { data: storageData, error: storageError } = await _supabase
-        .storage
-        .from('product-images')
-        .upload(fileName, file);
+    // 1. Supabase Storage Bucket Mein Upload
+    const { data: storageData, error: storageError } = await _supabase.storage
+      .from('product-images')
+      .upload(fileName, file);
 
-      if (storageError) throw storageError;
+    if (storageError) throw storageError;
 
-      const { data: publicUrlData } = _supabase
-        .storage
-        .from('product-images')
-        .getPublicUrl(fileName);
+    // 2. Direct Public URL Fetch
+    const { data: publicUrlData } = _supabase.storage
+      .from('product-images')
+      .getPublicUrl(fileName);
 
-      const imageUrl = publicUrlData.publicUrl;
+    const imageUrl = publicUrlData.publicUrl;
 
-      const { data: dbData, error: dbError } = await _supabase
-        .from('Products')
-        .insert([
-          { 
-            title: title, 
-            price: parseFloat(price), 
-            image_url: imageUrl 
-          }
-        ]);
+    // 3. Products Table Mein Insert
+    const { data: dbData, error: dbError } = await _supabase
+      .from('Products')
+      .insert([
+        {
+          title: title,
+          price: price,
+          image_url: imageUrl
+        }
+      ]);
 
-      if (dbError) throw dbError;
+    if (dbError) throw dbError;
 
-      alert("Product aur Image successfully save ho chuke hain!");
-      productForm.reset();
+    alert("Product aur Image successfully save ho gaye!");
+    productForm.reset();
+    location.reload();
 
-    } catch (error) {
-      alert("Error: " + error.message);
-    }
-  });
+  } catch (error) {
+    alert("Error: " + error.message);
+  }
+});
+ 
 }
     
   </script>
