@@ -13,6 +13,8 @@
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -1031,12 +1033,51 @@
       document.getElementById('booking-form').classList.add('hidden');
       document.getElementById('booking-confirmation').classList.remove('hidden');
     }
+  
 
     function resetBookingForm() {
       document.getElementById('booking-form').reset();
       document.getElementById('booking-confirmation').classList.add('hidden');
       document.getElementById('booking-form').classList.remove('hidden');
     }
+      
+  const SUPABASE_URL = 'https://https://bxtwasysebvpcvweqqao.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4dHdhc3lzZWJ2cGN2d2VxcWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjkwNTAsImV4cCI6MjEwNDU0NTA1MH0.lxE4mIf1X0LtSUos6tnf01VgiwCasCcoExmzvpgJYXo';
+
+  const { createClient } = supabase;
+  const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function loadProducts() {
+    const productContainer = document.getElementById('product-list');
+    if (!productContainer) return;
+
+    try {
+      const { data: products, error } = await _supabase
+        .from('Products')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      if (products && products.length > 0) {
+        productContainer.innerHTML = products.map(product => `
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition">
+            <img src="${product.image_url}" alt="${product.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="font-bold text-lg text-gray-800">${product.title}</h3>
+              <p class="text-gold-DEFAULT font-semibold text-md mt-1">Rs. ${product.price}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error.message);
+    }
+  }
+
+  loadProducts();
+
+    
   </script>
 </body>
 </html>
