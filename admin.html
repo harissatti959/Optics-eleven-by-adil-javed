@@ -12,6 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
+  <!-- Line 14: Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Line 15: 👇 Yahan Supabase CDN paste karein -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -966,6 +972,67 @@
     }
 
     window.addEventListener('DOMContentLoaded', initData);
+  
+
+const SUPABASE_URL = 'https://bxtwasysebvpcvweqqao.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4dHdhc3lzZWJ2cGN2d2VxcWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjkwNTAsImV4cCI6MjEwNDU0NTA1MH0.lxE4mIf1X0LtSUos6tnf01VgiwCasCcoExmzvpgJYXo';
+const { createClient } = supabase;
+const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const productForm = document.getElementById('productForm');
+if (productForm) {
+  productForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('title').value.trim();
+    const price = document.getElementById('price').value;
+    const fileInput = document.getElementById('imageFile');
+    const file = fileInput.files[0];
+
+    if (!file) {
+      alert("Pehle image select karein!");
+      return;
+    }
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+
+      const { data: storageData, error: storageError } = await _supabase
+        .storage
+        .from('product-images')
+        .upload(fileName, file);
+
+      if (storageError) throw storageError;
+
+      const { data: publicUrlData } = _supabase
+        .storage
+        .from('product-images')
+        .getPublicUrl(fileName);
+
+      const imageUrl = publicUrlData.publicUrl;
+
+      const { data: dbData, error: dbError } = await _supabase
+        .from('Products')
+        .insert([
+          { 
+            title: title, 
+            price: parseFloat(price), 
+            image_url: imageUrl 
+          }
+        ]);
+
+      if (dbError) throw dbError;
+
+      alert("Product aur Image successfully save ho chuke hain!");
+      productForm.reset();
+
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
+  });
+}
+    
   </script>
 </body>
 </html>
