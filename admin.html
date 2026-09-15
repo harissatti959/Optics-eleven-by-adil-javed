@@ -560,9 +560,32 @@
         image: imageBase64 || 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80'
       };
 
-      products.push(newFrame);
-      saveAndRender();
-      closeProductModal();
+          // Supabase DB mein product save karein
+    try {
+      const { data, error } = await db.from('products').insert([{
+        name: newFrame.name,
+        brand: newFrame.brand,
+        price: newFrame.priceNumeric,
+        stock: newFrame.stockCount,
+        shape: newFrame.shape,
+        material: newFrame.material,
+        description: newFrame.description,
+        image: newFrame.image
+      }]);
+
+      if (error) {
+        alert("Database save error: " + error.message);
+      } else {
+        alert("Product Successfully Live Database Par Upload Ho Gaya!");
+        products.push(newFrame);
+        if (typeof saveAndRender === 'function') saveAndRender();
+        closeProductModal();
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong while saving to Supabase.");
+    }
+
     }
 
     // Helper function to read image file into Base64 format
