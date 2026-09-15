@@ -1,31 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Optics Eleven - Admin Portal</title>
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optics Eleven | Executive Optical & Clinic Administration Suite</title>
+  <meta name="description" content="Administration, inventory control, and order fulfillment system for Optics Eleven with Dr. Adil Javed, Blue Area, Islamabad." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
   <!-- Tailwind CSS CDN -->
+  <!-- Line 14: Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Line 15: 👇 Yahan Supabase CDN paste karein -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
+            gold: {
+              DEFAULT: '#D4AF37',
+              light: '#f3e5ab',
+              dark: '#997d26'
+            },
             slate: {
-              850: '#1e293b',
-              900: '#0f172a',
-              950: '#020617',
+              950: '#070D1A',
+              900: '#0F172A',
+              850: '#131D31',
+              800: '#1E293B'
             }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            luxury: ['Cinzel', 'serif']
           }
         }
       }
     }
   </script>
 
-  <!-- Supabase JS Client Library -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #070D1A; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; border: 1px solid rgba(212,175,55,0.2); }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+  </style>
 </head>
+<body class="bg-[#070D1A] text-slate-100 font-sans antialiased selection:bg-[#D4AF37] selection:text-[#070D1A]">
 
   <!-- TOP BAR -->
   <header class="sticky top-0 z-40 bg-[#0F172A]/95 backdrop-blur-md border-b border-white/10">
@@ -707,308 +738,4 @@
 
             <td class="py-3 px-4 text-right">
               <div class="flex items-center justify-end gap-2">
-                <a href="https://wa.me/${o.customerPhone.replace(/[^0-9]/g, '')}?text=${waText}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-[11px] flex items-center gap-1 transition-colors">
-                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
-                  <span>WhatsApp</span>
-                </a>
-                <button onclick="deleteOrder('${o.id}')" title="Delete Order" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400">
-                  <i data-lucide="trash" class="w-3.5 h-3.5"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      lucide.createIcons();
-    }
-
-    function renderAnalytics() {
-      const brandCounts = {};
-      products.forEach(p => {
-        brandCounts[p.brand] = (brandCounts[p.brand] || 0) + 1;
-      });
-
-      const brandList = document.getElementById('brand-analytics-list');
-      brandList.innerHTML = Object.keys(brandCounts).map(b => {
-        const count = brandCounts[b];
-        const pct = Math.round((count / products.length) * 100);
-        return `
-          <div>
-            <div class="flex justify-between text-xs mb-1">
-              <span class="text-white font-medium">${b}</span>
-              <span class="text-[#D4AF37] font-mono">${count} frames (${pct}%)</span>
-            </div>
-            <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-white/5">
-              <div class="h-full bg-gradient-to-r from-[#D4AF37] to-amber-500 rounded-full" style="width: ${pct}%"></div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      const lowList = document.getElementById('low-stock-alert-list');
-      const lowItems = products.filter(p => p.stockCount <= 3);
-
-      if (lowItems.length === 0) {
-        lowList.innerHTML = `
-          <div class="text-center py-6 text-emerald-400 text-xs flex items-center justify-center gap-2">
-            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-            <span>All frames have healthy stock levels (> 3 units).</span>
-          </div>
-        `;
-      } else {
-        lowList.innerHTML = lowItems.map(p => `
-          <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center">
-                ${p.image ? `<img src="${p.image}" class="w-full h-full object-contain">` : `<i data-lucide="glasses" class="w-4 h-4 text-slate-500"></i>`}
-              </div>
-              <div>
-                <div class="font-bold text-white text-xs">${p.name}</div>
-                <div class="text-[10px] text-slate-400">${p.brand}</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${p.stockCount === 0 ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'}">
-                ${p.stockCount === 0 ? '0 Units' : p.stockCount + ' Left'}
-              </span>
-              <button onclick="adjustStock('${p.id}', 3)" class="px-2 py-1 bg-white/5 hover:bg-white/10 rounded text-[10px] text-[#D4AF37] font-semibold border border-white/10">
-                +3 Stock
-              </button>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      lucide.createIcons();
-    }
-
-    function adjustStock(id, delta) {
-      const prod = products.find(p => p.id === id);
-      if (!prod) return;
-      prod.stockCount = Math.max(0, (prod.stockCount || 0) + delta);
-      saveAndRender();
-    }
-
-    function openProductModal() {
-      document.getElementById('product-form').reset();
-      document.getElementById('pf-id').value = '';
-      document.getElementById('modal-product-title').textContent = 'Add New Eyewear Frame';
-      document.getElementById('pf-submit-btn-text').textContent = 'Save Frame';
-      previewProductImage('');
-      document.getElementById('product-modal').classList.remove('hidden');
-    }
-
-    function editProduct(id) {
-      const prod = products.find(p => p.id === id);
-      if (!prod) return;
-      document.getElementById('pf-id').value = prod.id;
-      document.getElementById('pf-name').value = prod.name;
-      document.getElementById('pf-brand').value = prod.brand;
-      document.getElementById('pf-price').value = prod.priceNumeric;
-      document.getElementById('pf-stock').value = prod.stockCount;
-      document.getElementById('pf-shape').value = prod.shape || 'Aviator';
-      document.getElementById('pf-material').value = prod.material || '';
-      document.getElementById('pf-image').value = prod.image || '';
-      document.getElementById('pf-desc').value = prod.description || '';
-
-      document.getElementById('modal-product-title').textContent = 'Edit ' + prod.name;
-      document.getElementById('pf-submit-btn-text').textContent = 'Update Frame';
-      previewProductImage(prod.image || '');
-
-      document.getElementById('product-modal').classList.remove('hidden');
-    }
-
-    function closeProductModal() {
-      document.getElementById('product-modal').classList.add('hidden');
-    }
-
-    function previewProductImage(url) {
-      const img = document.getElementById('pf-preview-img');
-      const icon = document.getElementById('pf-preview-icon');
-      if (url && url.trim()) {
-        img.src = url.trim();
-        img.classList.remove('hidden');
-        icon.classList.add('hidden');
-      } else {
-        img.classList.add('hidden');
-        icon.classList.remove('hidden');
-      }
-    }
-
-    function handleProductSubmit(e) {
-      e.preventDefault();
-      const id = document.getElementById('pf-id').value;
-      const name = document.getElementById('pf-name').value.trim();
-      const brand = document.getElementById('pf-brand').value.trim();
-      const priceNumeric = Number(document.getElementById('pf-price').value);
-      const stockCount = Number(document.getElementById('pf-stock').value);
-      const shape = document.getElementById('pf-shape').value;
-      const material = document.getElementById('pf-material').value.trim();
-      const image = document.getElementById('pf-image').value.trim() || 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80';
-      const description = document.getElementById('pf-desc').value.trim();
-
-      if (id) {
-        const idx = products.findIndex(p => p.id === id);
-        if (idx !== -1) {
-          products[idx] = { ...products[idx], name, brand, priceNumeric, stockCount, shape, material, image, description };
-        }
-      } else {
-        const newId = 'oe-' + Date.now().toString(36);
-        products.unshift({ id: newId, name, brand, priceNumeric, stockCount, shape, material, image, description });
-      }
-
-      closeProductModal();
-      saveAndRender();
-    }
-
-    function deleteProduct(id) {
-      if (confirm('Delete this frame from the catalog?')) {
-        products = products.filter(p => p.id !== id);
-        saveAndRender();
-      }
-    }
-
-    function openNewOrderModal() {
-      const select = document.getElementById('of-product');
-      select.innerHTML = products.map(p => `
-        <option value="${p.id}">${p.brand} - ${p.name} (PKR ${p.priceNumeric.toLocaleString()})</option>
-      `).join('');
-      document.getElementById('order-modal').classList.remove('hidden');
-    }
-
-    function closeNewOrderModal() {
-      document.getElementById('order-modal').classList.add('hidden');
-    }
-
-    function handleOrderSubmit(e) {
-      e.preventDefault();
-      const prodId = document.getElementById('of-product').value;
-      const prod = products.find(p => p.id === prodId);
-      if (!prod) return;
-
-      const newOrder = {
-        id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
-        customerName: document.getElementById('of-name').value.trim(),
-        customerPhone: document.getElementById('of-phone').value.trim(),
-        productName: prod.name,
-        brand: prod.brand,
-        amount: prod.priceNumeric,
-        status: document.getElementById('of-status').value,
-        date: new Date().toISOString().split('T')[0]
-      };
-
-      orders.unshift(newOrder);
-      if (prod.stockCount > 0) {
-        prod.stockCount -= 1;
-      }
-
-      closeNewOrderModal();
-      saveAndRender();
-      switchTab('orders');
-    }
-
-    function updateOrderStatus(id, newStatus) {
-      const ord = orders.find(o => o.id === id);
-      if (ord) {
-        ord.status = newStatus;
-        saveAndRender();
-      }
-    }
-
-    function deleteOrder(id) {
-      if (confirm('Remove this customer order record?')) {
-        orders = orders.filter(o => o.id !== id);
-        saveAndRender();
-      }
-    }
-
-    function exportData() {
-      const data = {
-        clinic: 'Optics Eleven with Dr. Adil Javed',
-        location: 'Blue Area, Islamabad',
-        exportTimestamp: new Date().toISOString(),
-        products,
-        orders
-      };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `optics-eleven-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    window.addEventListener('DOMContentLoaded', initData);
-  
-
-const SUPABASE_URL = 'https://bxtwasysebvpcvweqqao.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4dHdhc3lzZWJ2cGN2d2VxcWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjkwNTAsImV4cCI6MjEwNDU0NTA1MH0.lxE4mIf1X0LtSUos6tnf01VgiwCasCcoExmzvpgJYXo';
-const { createClient } = supabase;
-const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-const productForm = document.getElementById('productForm');
-if (productForm) {
-  productForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById('title').value.trim();
-       const title = document.getElementById('pf-name') ? document.getElementById('pf-name').value : '';
-  const price = document.getElementById('pf-price') ? parseFloat(document.getElementById('pf-price').value) : 0;
-  const fileInput = document.getElementById('pf-image-file');
-  const file = fileInput ? fileInput.files[0] : null;
-
-  if (!file) {
-    alert("Pehle gallery se image select karein!");
-    return;
-  }
-
-  try {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
-
-    // 1. Storage Bucket Mein Upload
-    const { data: storageData, error: storageError } = await _supabase.storage
-      .from('product-images')
-      .upload(fileName, file);
-
-    if (storageError) throw storageError;
-
-    // 2. Direct Public URL Fetch
-    const { data: publicUrlData } = _supabase.storage
-      .from('product-images')
-      .getPublicUrl(fileName);
-
-    const imageUrl = publicUrlData.publicUrl;
-
-    // 3. Products Table Mein Insert
-    const { data: dbData, error: dbError } = await _supabase
-      .from('Products')
-      .insert([
-        {
-          title: title,
-          price: price,
-          image_url: imageUrl
-        }
-      ]);
-
-    if (dbError) throw dbError;
-
-    alert("Product aur Image successfully save ho gaye!");
-    if (typeof productForm !== 'undefined') productForm.reset();
-    location.reload();
-
-  } catch (error) {
-    alert("Error: " + error.message);
-  }
-});
-
-  }
-});
- 
-}
-    
-  </script>
-</body>
-</html>
+                <a href="https://wa.me/${o.customerP
