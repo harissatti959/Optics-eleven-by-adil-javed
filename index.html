@@ -940,6 +940,62 @@
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
+    
+  // LocalStorage se products load karne ka function
+  function getStoreProducts() {
+    const localData = localStorage.getItem('oe_admin_products');
+    if (localData) {
+      try {
+        const parsed = JSON.parse(localData);
+        if (parsed && parsed.length > 0) {
+          return parsed;
+        }
+      } catch (e) {
+        console.error('Error parsing local storage products:', e);
+      }
+    }
+    return DEFAULT_PRODUCTS;
+  }
+
+  // Catalog render function
+  function renderCatalog() {
+    const catalogGrid = document.getElementById('catalog-grid');
+    if (!catalogGrid) return;
+
+    const productsToDisplay = getStoreProducts();
+
+    catalogGrid.innerHTML = productsToDisplay.map(product => `
+      <div class="product-card group bg-[#0F172A] rounded-2xl border border-white/10 overflow-hidden shadow-xl hover:border-[#D4AF37]/50 transition-all duration-300">
+        <div class="relative h-64 bg-slate-950 overflow-hidden">
+          <img 
+            src="${product.image}" 
+            alt="${product.name}" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          >
+          <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-[#0F172A]/80 backdrop-blur-md border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider">
+            ${product.brand || 'Optics Eleven'}
+          </div>
+        </div>
+        <div class="p-5 space-y-3">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-base font-bold text-white group-hover:text-[#D4AF37] transition-colors">${product.name}</h3>
+              <p class="text-xs text-slate-400 mt-0.5">${product.shape || 'Frame'} • ${product.material || 'Premium Finish'}</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-white/10">
+            <span class="text-lg font-extrabold text-[#D4AF37] font-mono">PKR ${Number(product.priceNumeric || product.price).toLocaleString()}</span>
+            <button onclick="orderFrame('${product.id}')" class="px-3.5 py-2 rounded-xl bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-md transition-all">
+              Order Now
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Auto load on page load
+  window.addEventListener('DOMContentLoaded', renderCatalog);
 
     // Mobile Menu
     function toggleMobileMenu() {
