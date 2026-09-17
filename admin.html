@@ -320,7 +320,7 @@
         </div>
 
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Upload Product Photo from Gallery *</label>
+          <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Upload Product Photo from Gallery</label>
           <input 
             type="file" 
             id="pf-image-file" 
@@ -347,6 +347,16 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
+    // Supabase Client Initialization (Apni URL aur Key yahan dalain agar real Supabase DB chalana hai)
+    const SUPABASE_URL = "https://YOUR-SUPABASE-PROJECT-URL.supabase.co";
+    const SUPABASE_ANON_KEY = "YOUR-SUPABASE-ANON-KEY";
+    
+    // Safety check to instantiate supabase client safely
+    let supabase = null;
+    if (typeof window.supabase !== 'undefined' && SUPABASE_URL.startsWith('http')) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
     const DEFAULT_PRODUCTS = [
       {
         id: 'oe-tf-01',
@@ -414,7 +424,7 @@
       updateKPIs();
       renderProductsTable();
       renderOrdersTable();
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function resetToDefaults() {
@@ -441,7 +451,7 @@
       });
 
       document.getElementById('tab-' + tab).classList.remove('hidden');
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function updateKPIs() {
@@ -497,7 +507,7 @@
         `;
       }).join('');
 
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function renderOrdersTable() {
@@ -514,7 +524,7 @@
           </td>
         </tr>
       `).join('');
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function deleteProduct(id) {
@@ -528,6 +538,7 @@
       document.getElementById('product-form').reset();
       document.getElementById('product-modal').classList.remove('hidden'); 
     }
+    
     function closeProductModal() { 
       document.getElementById('product-modal').classList.add('hidden'); 
     }
@@ -560,39 +571,37 @@
         image: imageBase64 || 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80'
       };
 
-          // Supabase DB mein product save karein
-         
-            try {
-      const { data, error } = await supabase.from('products').insert([{
-        name: newFrame.name,
-        brand: newFrame.brand,
-        price: newFrame.priceNumeric,
-        stock: newFrame.stockCount,
-        shape: newFrame.shape,
-        material: newFrame.material,
-        description: newFrame.description,
-        image: newFrame.image
-      }]);
+      // Supabase DB mein save karne ki koshish karein (agar configured ho)
+      if (supabase) {
+        try {
+          const { data, error } = await supabase.from('products').insert([{
+            name: newFrame.name,
+            brand: newFrame.brand,
+            price: newFrame.priceNumeric,
+            stock: newFrame.stockCount,
+            shape: newFrame.shape,
+            material: newFrame.material,
+            description: newFrame.description,
+            image: newFrame.image
+          }]);
 
-      if (error) {
-        console.error("Supabase Error Details:", error);
-        alert("Supabase Error:\nMessage: " + error.message + "\nHint: " + (error.hint || "None"));
-        return;
+          if (error) {
+            console.error("Supabase Error Details:", error);
+            alert("Supabase Error:\nMessage: " + error.message + "\nHint: " + (error.hint || "None"));
+            return;
+          }
+          alert("Product Successfully Live Database Par Upload Ho Gaya!");
+        } catch (err) {
+          console.error("System Error:", err);
+          alert("System Error: " + err.message);
+        }
       }
 
-      alert("Product Successfully Live Database Par Upload Ho Gaya!");
+      // Local state update
       products.push(newFrame);
-      if (typeof saveAndRender === 'function') saveAndRender();
-      if (typeof closeProductModal === 'function') closeProductModal();
-
-    } catch (err) {
-      console.error("System Error:", err);
-      alert("System Error: " + err.message);
+      saveAndRender();
+      closeProductModal();
     }
-
-
-
-    
 
     // Helper function to read image file into Base64 format
     function convertFileToBase64(file) {
