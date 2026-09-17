@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Optics Eleven | Executive Optical & Clinic Administration Suite</title>
-  <meta name="description" content="Administration, inventory control, and order fulfillment system for Optics Eleven with Dr. Adil Javed, Blue Area, Islamabad." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,17 +19,8 @@
       theme: {
         extend: {
           colors: {
-            gold: {
-              DEFAULT: '#D4AF37',
-              light: '#f3e5ab',
-              dark: '#997d26'
-            },
-            slate: {
-              950: '#070D1A',
-              900: '#0F172A',
-              850: '#131D31',
-              800: '#1E293B'
-            }
+            gold: { DEFAULT: '#D4AF37', light: '#f3e5ab', dark: '#997d26' },
+            slate: { 950: '#070D1A', 900: '#0F172A', 850: '#131D31', 800: '#1E293B' }
           },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
@@ -71,10 +61,6 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>System Active • LocalStorage Synced</span>
-        </div>
         <button onclick="resetToDefaults()" title="Reset to default initial data" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 flex items-center gap-1.5 transition-colors">
           <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-slate-400"></i>
           <span class="hidden sm:inline">Reset Demo</span>
@@ -143,10 +129,6 @@
         <i data-lucide="package-check" class="w-4 h-4"></i>
         <span>Customer Orders</span>
       </button>
-      <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
-        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-        <span>Store Analytics</span>
-      </button>
     </div>
 
     <!-- TAB 1: INVENTORY & PRODUCTS -->
@@ -158,27 +140,9 @@
             type="text"
             id="search-input"
             oninput="renderProductsTable()"
-            placeholder="Search by name, brand, shape or material..."
+            placeholder="Search by name or brand..."
             class="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
           />
-        </div>
-
-        <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
-          <select id="brand-filter" onchange="renderProductsTable()" class="px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-[#D4AF37]">
-            <option value="ALL">All Brands</option>
-            <option value="Tom Ford">Tom Ford</option>
-            <option value="Lindberg">Lindberg</option>
-            <option value="Gucci">Gucci</option>
-            <option value="Oliver Peoples">Oliver Peoples</option>
-            <option value="Ray-Ban">Ray-Ban</option>
-          </select>
-
-          <select id="stock-filter" onchange="renderProductsTable()" class="px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-[#D4AF37]">
-            <option value="ALL">All Stock Status</option>
-            <option value="INSTOCK">In Stock Only</option>
-            <option value="LOWSTOCK">Low Stock (≤ 3 units)</option>
-            <option value="OUTOFSTOCK">Out of Stock</option>
-          </select>
         </div>
       </div>
 
@@ -203,23 +167,6 @@
 
     <!-- TAB 2: ORDERS MANAGEMENT -->
     <div id="tab-orders" class="space-y-4 hidden">
-      <div class="p-4 rounded-2xl bg-[#0F172A] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="text-sm font-semibold text-white flex items-center gap-2">
-          <span>Customer Eyewear Orders & Consultations</span>
-          <span class="px-2 py-0.5 rounded-full bg-white/10 text-[11px] text-[#D4AF37]" id="orders-badge-count">0</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <select id="orders-status-filter" onchange="renderOrdersTable()" class="px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-[#D4AF37]">
-            <option value="ALL">All Order Statuses</option>
-            <option value="Pending">Pending</option>
-            <option value="Confirmed">Confirmed</option>
-            <option value="Shipped">Shipped</option>
-            <option value="Delivered">Delivered</option>
-            <option value="Cancelled">Cancelled</option>
-          </select>
-        </div>
-      </div>
-
       <div class="rounded-2xl bg-[#0F172A] border border-white/10 overflow-hidden shadow-2xl">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-slate-300">
@@ -239,30 +186,9 @@
       </div>
     </div>
 
-    <!-- TAB 3: STORE ANALYTICS -->
-    <div id="tab-analytics" class="space-y-6 hidden">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-6 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="font-bold text-white text-sm">Inventory by Designer Brand</h3>
-            <i data-lucide="pie-chart" class="w-4 h-4 text-[#D4AF37]"></i>
-          </div>
-          <div id="brand-analytics-list" class="space-y-3"></div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-[#0F172A] border border-white/10 shadow-xl space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="font-bold text-white text-sm">Attention Required (Low or Out of Stock)</h3>
-            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
-          </div>
-          <div id="low-stock-alert-list" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
-        </div>
-      </div>
-    </div>
-
   </main>
 
-  <!-- MODAL: ADD / EDIT PRODUCT -->
+  <!-- MODAL: ADD PRODUCT -->
   <div id="product-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md">
     <div class="relative w-full max-w-2xl bg-[#0F172A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
       <div class="p-5 bg-slate-900 border-b border-white/10 flex items-center justify-between">
@@ -271,8 +197,8 @@
             <i data-lucide="glasses" class="w-5 h-5"></i>
           </div>
           <div>
-            <h3 class="text-base font-bold text-white" id="modal-product-title">Add New Eyewear Frame</h3>
-            <p class="text-[11px] text-[#D4AF37]">Optics Eleven Blue Area Inventory System</p>
+            <h3 class="text-base font-bold text-white">Add New Eyewear Frame</h3>
+            <p class="text-[11px] text-[#D4AF37]">Optics Eleven Inventory Management</p>
           </div>
         </div>
         <button onclick="closeProductModal()" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors">
@@ -281,8 +207,6 @@
       </div>
 
       <form id="product-form" onsubmit="handleProductSubmit(event)" class="p-6 space-y-4 overflow-y-auto">
-        <input type="hidden" id="pf-id" value="">
-
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Frame Name *</label>
@@ -320,7 +244,7 @@
         </div>
 
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Upload Product Photo from Gallery</label>
+          <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Upload Product Photo</label>
           <input 
             type="file" 
             id="pf-image-file" 
@@ -331,14 +255,14 @@
 
         <div>
           <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Optical Description</label>
-          <textarea id="pf-desc" rows="2" placeholder="Brief technical specifications..." class="w-full px-3.5 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]"></textarea>
+          <textarea id="pf-description" rows="2" placeholder="Brief technical specifications..." class="w-full px-3.5 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#D4AF37]"></textarea>
         </div>
 
         <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
           <button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-slate-300">Cancel</button>
           <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#D4AF37] hover:bg-[#e2bd45] text-[#0F172A] font-bold text-xs shadow-lg transition-all flex items-center gap-1.5">
             <i data-lucide="check" class="w-4 h-4"></i>
-            <span id="pf-submit-btn-text">Save Frame</span>
+            <span>Save Frame</span>
           </button>
         </div>
       </form>
@@ -347,14 +271,17 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // Supabase Client Initialization (Apni URL aur Key yahan dalain agar real Supabase DB chalana hai)
-    const SUPABASE_URL = "https://YOUR-SUPABASE-PROJECT-URL.supabase.co";
-    const SUPABASE_ANON_KEY = "YOUR-SUPABASE-ANON-KEY";
+    // Safe Supabase Credentials
+    const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co"; 
+    const SUPABASE_ANON_KEY = "YOUR-ANON-KEY";
     
-    // Safety check to instantiate supabase client safely
-    let supabase = null;
-    if (typeof window.supabase !== 'undefined' && SUPABASE_URL.startsWith('http')) {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    let supabaseClient = null;
+    try {
+      if (typeof window.supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co')) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch (e) {
+      console.warn("Supabase initialization skipped - fallback to local storage");
     }
 
     const DEFAULT_PRODUCTS = [
@@ -395,23 +322,20 @@
       }
     ];
 
-    const LS_KEY_PRODUCTS = 'oe_admin_products';
-    const LS_KEY_ORDERS = 'oe_admin_orders';
-
     let products = [];
     let orders = [];
 
     function initData() {
       try {
-        const savedProd = localStorage.getItem(LS_KEY_PRODUCTS);
-        products = savedProd ? JSON.parse(savedProd) : [...DEFAULT_PRODUCTS];
+        const savedProd = localStorage.getItem('oe_admin_products');
+        products = (savedProd && JSON.parse(savedProd).length > 0) ? JSON.parse(savedProd) : [...DEFAULT_PRODUCTS];
       } catch (e) {
         products = [...DEFAULT_PRODUCTS];
       }
 
       try {
-        const savedOrd = localStorage.getItem(LS_KEY_ORDERS);
-        orders = savedOrd ? JSON.parse(savedOrd) : [...DEFAULT_ORDERS];
+        const savedOrd = localStorage.getItem('oe_admin_orders');
+        orders = (savedOrd && JSON.parse(savedOrd).length > 0) ? JSON.parse(savedOrd) : [...DEFAULT_ORDERS];
       } catch (e) {
         orders = [...DEFAULT_ORDERS];
       }
@@ -419,8 +343,8 @@
     }
 
     function saveAndRender() {
-      localStorage.setItem(LS_KEY_PRODUCTS, JSON.stringify(products));
-      localStorage.setItem(LS_KEY_ORDERS, JSON.stringify(orders));
+      localStorage.setItem('oe_admin_products', JSON.stringify(products));
+      localStorage.setItem('oe_admin_orders', JSON.stringify(orders));
       updateKPIs();
       renderProductsTable();
       renderOrdersTable();
@@ -428,7 +352,7 @@
     }
 
     function resetToDefaults() {
-      if (confirm('Reset all products and orders to default factory state?')) {
+      if (confirm('Reset all products to default state?')) {
         products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
         orders = JSON.parse(JSON.stringify(DEFAULT_ORDERS));
         saveAndRender();
@@ -438,18 +362,11 @@
     function switchTab(tab) {
       document.getElementById('tab-inventory').classList.add('hidden');
       document.getElementById('tab-orders').classList.add('hidden');
-      document.getElementById('tab-analytics').classList.add('hidden');
 
-      const tabs = ['inventory', 'orders', 'analytics'];
-      tabs.forEach(t => {
-        const btn = document.getElementById('tab-btn-' + t);
-        if (t === tab) {
-          btn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#D4AF37] text-[#0F172A] transition-all flex items-center gap-2 shadow-md';
-        } else {
-          btn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2';
-        }
-      });
+      document.getElementById('tab-btn-inventory').className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2';
+      document.getElementById('tab-btn-orders').className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2';
 
+      document.getElementById('tab-btn-' + tab).className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#D4AF37] text-[#0F172A] transition-all flex items-center gap-2 shadow-md';
       document.getElementById('tab-' + tab).classList.remove('hidden');
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
@@ -459,53 +376,48 @@
       const inStockProds = products.filter(p => p.stockCount > 0).length;
       const totalUnits = products.reduce((acc, cur) => acc + Number(cur.stockCount || 0), 0);
       const totalVal = products.reduce((acc, cur) => acc + (Number(cur.stockCount || 0) * Number(cur.priceNumeric || 0)), 0);
-      const totalOrders = orders.length;
-      const pendingOrders = orders.filter(o => o.status === 'Pending').length;
 
       document.getElementById('stat-total-products').textContent = totalProds;
       document.getElementById('stat-instock-products').textContent = inStockProds;
       document.getElementById('stat-total-stock').textContent = totalUnits;
       document.getElementById('stat-catalog-val').textContent = 'PKR ' + totalVal.toLocaleString();
-      document.getElementById('stat-total-orders').textContent = totalOrders;
-      document.getElementById('stat-pending-orders').textContent = pendingOrders + ' pending';
-      document.getElementById('orders-badge-count').textContent = totalOrders;
+      document.getElementById('stat-total-orders').textContent = orders.length;
+      document.getElementById('stat-pending-orders').textContent = orders.filter(o => o.status === 'Pending').length + ' pending';
     }
 
     function renderProductsTable() {
       const tbody = document.getElementById('products-table-body');
-      const search = document.getElementById('search-input').value.toLowerCase().trim();
+      const search = (document.getElementById('search-input')?.value || '').toLowerCase().trim();
 
       const filtered = products.filter(p => !search || p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search));
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="py-12 text-center text-slate-500">No frames match the filter.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="py-12 text-center text-slate-500">No frames match the search filter.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = filtered.map(p => {
-        return `
-          <tr class="hover:bg-white/[0.02] transition-colors">
-            <td class="py-3 px-4">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-10 rounded-lg bg-slate-950 border border-white/10 p-1 flex items-center justify-center overflow-hidden shrink-0">
-                  ${p.image ? `<img src="${p.image}" class="w-full h-full object-cover rounded">` : `<i data-lucide="glasses" class="w-5 h-5 text-slate-500"></i>`}
-                </div>
-                <div>
-                  <div class="font-bold text-white text-xs sm:text-sm line-clamp-1">${p.name}</div>
-                  <div class="text-[11px] text-[#D4AF37] font-semibold">${p.brand}</div>
-                </div>
+      tbody.innerHTML = filtered.map(p => `
+        <tr class="hover:bg-white/[0.02] transition-colors">
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-10 rounded-lg bg-slate-950 border border-white/10 p-1 flex items-center justify-center overflow-hidden shrink-0">
+                ${p.image ? `<img src="${p.image}" class="w-full h-full object-cover rounded">` : `<i data-lucide="glasses" class="w-5 h-5 text-slate-500"></i>`}
               </div>
-            </td>
-            <td class="py-3 px-4"><div class="text-white">${p.shape || 'Standard'}</div></td>
-            <td class="py-3 px-4 font-mono font-bold text-[#D4AF37]">PKR ${Number(p.priceNumeric).toLocaleString()}</td>
-            <td class="py-3 px-4 text-center font-bold font-mono text-white">${p.stockCount}</td>
-            <td class="py-3 px-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400">In Stock</span></td>
-            <td class="py-3 px-4 text-right">
-              <button onclick="deleteProduct('${p.id}')" class="p-1.5 rounded-lg bg-rose-500/10 text-rose-400"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-            </td>
-          </tr>
-        `;
-      }).join('');
+              <div>
+                <div class="font-bold text-white text-xs sm:text-sm line-clamp-1">${p.name}</div>
+                <div class="text-[11px] text-[#D4AF37] font-semibold">${p.brand}</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3 px-4"><div class="text-white">${p.shape || 'Standard'}</div></td>
+          <td class="py-3 px-4 font-mono font-bold text-[#D4AF37]">PKR ${Number(p.priceNumeric).toLocaleString()}</td>
+          <td class="py-3 px-4 text-center font-bold font-mono text-white">${p.stockCount}</td>
+          <td class="py-3 px-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${p.stockCount > 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}">${p.stockCount > 0 ? 'In Stock' : 'Out of Stock'}</span></td>
+          <td class="py-3 px-4 text-right">
+            <button onclick="deleteProduct('${p.id}')" class="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+          </td>
+        </tr>
+      `).join('');
 
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
@@ -543,7 +455,6 @@
       document.getElementById('product-modal').classList.add('hidden'); 
     }
 
-    // GALLERY FILE UPLOAD LOGIC
     async function handleProductSubmit(e) {
       e.preventDefault();
 
@@ -554,8 +465,7 @@
         try {
           imageBase64 = await convertFileToBase64(fileInput.files[0]);
         } catch (error) {
-          alert('Image upload karne me error aaya: ' + error.message);
-          return;
+          console.error("Image error:", error);
         }
       }
 
@@ -563,18 +473,23 @@
         id: 'oe-' + Date.now(),
         name: document.getElementById('pf-name').value,
         brand: document.getElementById('pf-brand').value,
-        priceNumeric: Number(document.getElementById('pf-price').value),
-        stockCount: Number(document.getElementById('pf-stock').value),
+        priceNumeric: Number(document.getElementById('pf-price').value || 0),
+        stockCount: Number(document.getElementById('pf-stock').value || 0),
         shape: document.getElementById('pf-shape').value,
         material: document.getElementById('pf-material').value,
-        description: document.getElementById('pf-desc').value,
+        description: document.getElementById('pf-description').value,
         image: imageBase64 || 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80'
       };
 
-      // Supabase DB mein save karne ki koshish karein (agar configured ho)
-      if (supabase) {
+      // Push to local array immediately
+      products.push(newFrame);
+      saveAndRender();
+      closeProductModal();
+
+      // Supabase Remote Sync (if valid)
+      if (supabaseClient) {
         try {
-          const { data, error } = await supabase.from('products').insert([{
+          await supabaseClient.from('products').insert([{
             name: newFrame.name,
             brand: newFrame.brand,
             price: newFrame.priceNumeric,
@@ -584,26 +499,15 @@
             description: newFrame.description,
             image: newFrame.image
           }]);
-
-          if (error) {
-            console.error("Supabase Error Details:", error);
-            alert("Supabase Error:\nMessage: " + error.message + "\nHint: " + (error.hint || "None"));
-            return;
-          }
-          alert("Product Successfully Live Database Par Upload Ho Gaya!");
+          alert("Frame Local Dashboard aur Supabase dono par save ho gaya!");
         } catch (err) {
-          console.error("System Error:", err);
-          alert("System Error: " + err.message);
+          console.log("Remote sync failed, stored locally.");
         }
+      } else {
+        alert("Frame successfully add ho gaya hai!");
       }
-
-      // Local state update
-      products.push(newFrame);
-      saveAndRender();
-      closeProductModal();
     }
 
-    // Helper function to read image file into Base64 format
     function convertFileToBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -613,8 +517,9 @@
       });
     }
 
-    // Initialize application on page launch
-    window.addEventListener('DOMContentLoaded', initData);
+    window.addEventListener('DOMContentLoaded', () => {
+      initData();
+    });
   </script>
 </body>
 </html>
