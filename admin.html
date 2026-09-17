@@ -561,7 +561,8 @@
       };
 
           // Supabase DB mein product save karein
-          try {
+         
+    try {
       const { data, error } = await db.from('products').insert([{
         name: newFrame.name,
         brand: newFrame.brand,
@@ -577,7 +578,7 @@
         console.error("Supabase Error Details:", error);
         alert("Supabase Error:\nMessage: " + error.message + "\nHint: " + (error.hint || "None"));
         return;
-      
+      }
 
       alert("Product Successfully Live Database Par Upload Ho Gaya!");
       products.push(newFrame);
@@ -585,9 +586,10 @@
       if (typeof closeProductModal === 'function') closeProductModal();
 
     } catch (err) {
-      console.error(err);
-      alert("Something went wrong while saving to Supabase.");
+      console.error("System Error:", err);
+      alert("System Error: " + err.message);
     }
+
 
     
 
