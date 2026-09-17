@@ -584,7 +584,7 @@
       products.push(newFrame);
       if (typeof saveAndRender === 'function') saveAndRender();
       if (typeof closeProductModal === 'function') closeProductModal();
-
+      }
      catch (err) {
       console.error("System Error:", err);
       alert("System Error: " + err.message);
