@@ -562,8 +562,8 @@
 
           // Supabase DB mein product save karein
          
-        try {
-      const { data, error } = await db.from('products').insert([{
+            try {
+      const { data, error } = await supabase.from('products').insert([{
         name: newFrame.name,
         brand: newFrame.brand,
         price: newFrame.priceNumeric,
@@ -578,17 +578,18 @@
         console.error("Supabase Error Details:", error);
         alert("Supabase Error:\nMessage: " + error.message + "\nHint: " + (error.hint || "None"));
         return;
-      
+      }
 
       alert("Product Successfully Live Database Par Upload Ho Gaya!");
       products.push(newFrame);
       if (typeof saveAndRender === 'function') saveAndRender();
       if (typeof closeProductModal === 'function') closeProductModal();
-      }
-     catch (err) {
+
+    } catch (err) {
       console.error("System Error:", err);
       alert("System Error: " + err.message);
     }
+
 
 
     
